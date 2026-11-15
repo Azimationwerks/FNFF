@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Content Admin — First Nation Fresh Foods</title>
+<link rel="icon" href="assets/brand/logo-mark.png">
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+  body{background:var(--sand)}
+  .abar{background:var(--charcoal);color:#EDE2D2;padding:13px 0;position:sticky;top:0;z-index:200;border-bottom:3px solid var(--ochre)}
+  .abar .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .abar img{height:40px;background:var(--cream);padding:4px 8px;border-radius:8px}
+  .abar b{font-family:var(--disp);font-size:16px;color:#fff}
+  .abar .sp{flex:1}
+  .tabs{display:flex;gap:7px;flex-wrap:wrap;padding:20px 0 0}
+  .tb{padding:10px 18px;border-radius:30px;border:1px solid var(--line);background:var(--white);font-size:var(--t-sm);font-weight:600;cursor:pointer}
+  .tb.on{background:var(--euc);border-color:var(--euc);color:#fff}
+  .panel{display:none;padding:24px 0 80px}
+  .panel.on{display:block}
+  .box{background:var(--white);border:1px solid var(--line);border-radius:var(--r-l);padding:24px;margin-bottom:20px;box-shadow:var(--sh-s)}
+  .box h3{margin-bottom:4px}
+  .box .hint{font-size:var(--t-xs);color:var(--body);margin-bottom:18px}
+  table{width:100%;border-collapse:collapse;font-size:var(--t-sm)}
+  th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--body);padding:9px 10px;border-bottom:2px solid var(--line)}
+  td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+  tr:hover td{background:var(--cream)}
+  .thumb{width:46px;height:36px;border-radius:6px;object-fit:cover;background:var(--sand);display:block}
+  .thumb-ph{width:46px;height:36px;border-radius:6px;background:var(--sand);display:grid;place-items:center;font-size:9px;color:#9C8C76;font-family:var(--mono)}
+  .rowbtn{padding:6px 11px;border-radius:7px;border:1px solid var(--line);background:var(--cream);font-size:12px;font-weight:600;cursor:pointer;margin-right:5px}
+  .rowbtn:hover{border-color:var(--ochre);color:var(--ochre)}
+  .rowbtn.del:hover{border-color:var(--maroon);color:var(--maroon)}
+  .tablewrap{max-height:520px;overflow-y:auto;border:1px solid var(--line);border-radius:var(--r-m)}
+  .fr{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:14px}
+  .ar{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+  .pill2{font-family:var(--mono);font-size:10.5px;padding:4px 10px;border-radius:20px;background:var(--euc-lt);color:var(--euc)}
+  .warn{background:var(--ochre-lt);border:1px solid rgba(196,98,45,.4);border-radius:var(--r-m);padding:14px 16px;font-size:var(--t-xs);color:var(--ink);margin-bottom:18px}
+  textarea{min-height:90px;resize:vertical}
+  code{font-family:var(--mono);font-size:11.5px;background:var(--cream);padding:2px 6px;border-radius:4px}
+  #exportOut{width:100%;height:220px;font-family:var(--mono);font-size:11px;padding:12px;border-radius:var(--r-m);border:1px solid var(--line);background:var(--cream)}
+</style>
+</head>
+<body>
+
+<div class="abar">
+  <div class="wrap">
+    <img src="assets/brand/logo-lockup.png" alt="First Nation Fresh Foods">
+    <b>Content Admin</b>
+    <span class="pill2" id="status">loaded</span>
+    <span class="sp"></span>
+    <a class="btn btn-sm btn-l" href="index.html">View site</a>
+    <a class="btn btn-sm btn-l" href="index.html?edit=1">Edit page text</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="tabs">
+    <button class="tb on" data-p="products">Products</button>
+    <button class="tb" data-p="categories">Categories</button>
+    <button class="tb" data-p="certs">Certificates &amp; Policies</button>
+    <button class="tb" data-p="videos">Videos</button>
+    <button class="tb" data-p="hero">Home Slider</button>
+    <button class="tb" data-p="markets">Markets</button>
+    <button class="tb" data-p="publish">Publish</button>
+  </div>
+
+  <!-- ============ PRODUCTS ============ -->
+  <section class="panel on" id="p-products">
+    <div class="box">
+      <h3>Add a product</h3>
+      <p class="hint">Products appear on the catalogue and on their category page. An image is optional — without one the card shows the product name.</p>
+      <div class="fr">
+        <div class="fld"><label>Product name</label><input id="pn" placeholder="e.g. Carrot Julienne"></div>
+        <div class="fld"><label>Category</label><select id="pc"></select></div>
+        <div class="fld"><label>Specification shown on the card</label><input id="ps" placeholder="e.g. Cut to order — specify size"></div>
+        <div class="fld"><label>Image (optional)</label><input type="file" id="pf" accept="image/*"></div>
+      </div>
+      <div class="ar">
+        <button class="btn btn-p btn-sm" id="padd">Add product</button>
+        <button class="btn btn-o btn-sm" id="pcancel" style="display:none">Cancel edit</button>
+        <span id="pmsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span>
+      </div>
+    </div>
+
+    <div class="box">
+      <h3>Product list <span class="pill2" id="pcnt"></span></h3>
+      <p class="hint">Click <b>Edit</b> to change a product, <b>Delete</b> to remove it.</p>
+      <div class="fr" style="grid-template-columns:1fr 220px">
+        <div class="fld"><label>Search</label><input id="pq" placeholder="Filter by name"></div>
+        <div class="fld"><label>Show category</label><select id="pfilter"></select></div>
+      </div>
+      <div class="tablewrap">
+        <table><thead><tr><th style="width:62px">Image</th><th>Name</th><th style="width:150px">Category</th><th>Specification</th><th style="width:150px"></th></tr></thead>
+        <tbody id="ptbody"></tbody></table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CATEGORIES ============ -->
+  <section class="panel" id="p-categories">
+    <div class="box">
+      <h3>Categories</h3>
+      <p class="hint">Each category becomes a page and a tile on the Products page. Edit the label or description, or add a new category.</p>
+      <div class="fr">
+        <div class="fld"><label>Category name</label><input id="cn" placeholder="e.g. Microgreens"></div>
+        <div class="fld"><label>Short description</label><input id="cb" placeholder="One line shown on the tile"></div>
+        <div class="fld"><label>Tile image</label><input type="file" id="cimg" accept="image/*"></div>
+      </div>
+      <div class="ar"><button class="btn btn-p btn-sm" id="cadd">Add category</button>
+      <span id="cmsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span></div>
+    </div>
+    <div class="box">
+      <h3>Existing categories</h3>
+      <div class="tablewrap">
+        <table><thead><tr><th style="width:62px">Tile</th><th>Name</th><th>Description</th><th style="width:70px">Lines</th><th style="width:150px"></th></tr></thead>
+        <tbody id="ctbody"></tbody></table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CERTIFICATES ============ -->
+  <section class="panel" id="p-certs">
+    <div class="box">
+      <h3>Add a certificate or policy</h3>
+      <p class="hint">These display on the Quality &amp; Safety pages as a gallery. Upload a scan or photo of the certificate and give it a title.</p>
+      <div class="fr">
+        <div class="fld"><label>Title</label><input id="cert-t" placeholder="e.g. SQF Certificate 2026"></div>
+        <div class="fld"><label>Issued by</label><input id="cert-i" placeholder="e.g. SAI Global"></div>
+        <div class="fld"><label>Status</label><input id="cert-s" placeholder="e.g. Current, or In final approval"></div>
+        <div class="fld"><label>Shows on</label><select id="cert-g"><option value="certificates">Certificates</option><option value="policies">Policies</option></select></div>
+        <div class="fld"><label>Certificate image / scan</label><input type="file" id="cert-f" accept="image/*"></div>
+      </div>
+      <div class="ar"><button class="btn btn-p btn-sm" id="certadd">Add</button>
+      <span id="certmsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span></div>
+    </div>
+    <div class="box">
+      <h3>Certificates</h3>
+      <div class="tablewrap"><table><thead><tr><th style="width:62px">Scan</th><th>Title</th><th>Issued by</th><th>Status</th><th style="width:100px"></th></tr></thead><tbody id="certbody"></tbody></table></div>
+    </div>
+    <div class="box">
+      <h3>Policies</h3>
+      <div class="tablewrap"><table><thead><tr><th style="width:62px">Scan</th><th>Title</th><th>Issued by</th><th>Status</th><th style="width:100px"></th></tr></thead><tbody id="polbody"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- ============ VIDEOS ============ -->
+  <section class="panel" id="p-videos">
+    <div class="box">
+      <h3>Add a video</h3>
+      <p class="hint">Paste a YouTube or Vimeo link, or the path to an MP4 you have placed in the <code>assets/</code> folder. Videos appear on the Facilities and Equipment pages.</p>
+      <div class="fr">
+        <div class="fld"><label>Title</label><input id="v-t" placeholder="e.g. Inside the cool-chain facility"></div>
+        <div class="fld"><label>Shows on</label><select id="v-g"><option value="facilities">Facilities page</option><option value="equipment">Equipment page</option></select></div>
+        <div class="fld" style="grid-column:1/-1"><label>Video link</label><input id="v-u" placeholder="https://www.youtube.com/watch?v=...  or  assets/video/tour.mp4"></div>
+        <div class="fld" style="grid-column:1/-1"><label>Short description</label><input id="v-d" placeholder="One line under the video"></div>
+      </div>
+      <div class="ar"><button class="btn btn-p btn-sm" id="vadd">Add video</button>
+      <span id="vmsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span></div>
+    </div>
+    <div class="box">
+      <h3>Videos</h3>
+      <div class="tablewrap"><table><thead><tr><th>Title</th><th style="width:110px">Page</th><th>Link</th><th style="width:100px"></th></tr></thead><tbody id="vbody"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- ============ HERO ============ -->
+  <section class="panel" id="p-hero">
+    <div class="box">
+      <h3>Home page slider</h3>
+      <p class="hint">Three slides rotate on the home page. Edit the wording and buttons, or replace the background image.</p>
+      <div id="herobox"></div>
+      <div class="ar" style="margin-top:16px"><button class="btn btn-p btn-sm" id="hsave">Save slider</button>
+      <span id="hmsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span></div>
+    </div>
+  </section>
+
+  <!-- ============ MARKETS ============ -->
+  <section class="panel" id="p-markets">
+    <div class="box">
+      <h3>Markets we serve</h3>
+      <p class="hint">These four sectors appear on the Markets page and on the home page. Edit, remove or add sectors here.</p>
+      <div id="mktbox"></div>
+      <div class="ar" style="margin-top:16px">
+        <button class="btn btn-p btn-sm" id="msave">Save markets</button>
+        <button class="btn btn-o btn-sm" id="madd">Add sector</button>
+        <span id="mmsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PUBLISH ============ -->
+  <section class="panel" id="p-publish">
+    <div class="box">
+      <div class="warn"><b>How saving works.</b> Changes are held in this browser straight away, so you can review the live
+      site immediately. To make them permanent for everyone, download the content file below and replace
+      <code>data/content.js</code> on the server. On WordPress this step disappears — saving writes to the database directly.</div>
+      <h3>Publish your changes</h3>
+      <p class="hint">Download the updated content file, or copy it to the clipboard.</p>
+      <div class="ar" style="margin-bottom:16px">
+        <button class="btn btn-p btn-sm" id="dl">Download content.js</button>
+        <button class="btn btn-g btn-sm" id="cp">Copy to clipboard</button>
+        <button class="btn btn-o btn-sm" id="rs">Discard all changes</button>
+      </div>
+      <textarea id="exportOut" readonly></textarea>
+    </div>
+  </section>
+</div>
+
+<script src="data/content.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+(function(){
+  'use strict';
+  var C = window.FNFF.get();
+  var S = document.getElementById('status');
+  function mark(){ S.textContent = 'unsaved changes'; S.style.background='var(--ochre-lt)'; S.style.color='var(--ochre-dk)'; }
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  function save(key,val){ window.FNFF.replaceSection(key,val); C = window.FNFF.get(); mark(); refreshExport(); }
+  function img(src,alt){ return src ? '<img class="thumb" src="'+esc(src)+'" alt="'+esc(alt)+'">' : '<div class="thumb-ph">none</div>'; }
+  function readFile(input, cb){
+    var f = input.files && input.files[0];
+    if(!f){ cb(''); return; }
+    var r = new FileReader();
+    r.onload = function(){ cb(r.result); };
+    r.readAsDataURL(f);
+  }
+
+  /* ---- tabs ---- */
+  document.querySelectorAll('.tb').forEach(function(t){
+    t.addEventListener('click', function(){
+      document.querySelectorAll('.tb').forEach(function(x){x.classList.remove('on');});
+      document.querySelectorAll('.panel').forEach(function(x){x.classList.remove('on');});
+      t.classList.add('on');
+      document.getElementById('p-'+t.getAttribute('data-p')).classList.add('on');
+    });
+  });
+
+  /* ================= PRODUCTS ================= */
+  var editIdx = -1;
+  function catOptions(sel, withAll){
+    sel.innerHTML = (withAll?'<option value="">All categories</option>':'') +
+      C.categories.map(function(c){return '<option value="'+c.id+'">'+c.label+'</option>';}).join('');
+  }
+  function catLabel(id){ var c=C.categories.filter(function(x){return x.id===id;})[0]; return c?c.label:id; }
+
+  function renderProducts(){
+    var q = document.getElementById('pq').value.toLowerCase().trim();
+    var f = document.getElementById('pfilter').value;
+    var rows = C.products.map(function(p,i){return {p:p,i:i};}).filter(function(o){
+      if(f && o.p.cat!==f) return false;
+      return !q || o.p.name.toLowerCase().indexOf(q)>-1;
+    });
+    document.getElementById('pcnt').textContent = C.products.length + ' products';
+    document.getElementById('ptbody').innerHTML = rows.map(function(o){
+      return '<tr><td>'+img(o.p.img,o.p.name)+'</td><td><b>'+esc(o.p.name)+'</b></td>'+
+        '<td>'+catLabel(o.p.cat)+'</td><td style="color:var(--body);font-size:12.5px">'+esc(o.p.spec||'')+'</td>'+
+        '<td><button class="rowbtn" data-e="'+o.i+'">Edit</button>'+
+        '<button class="rowbtn del" data-d="'+o.i+'">Delete</button></td></tr>';
+    }).join('') || '<tr><td colspan="5" style="text-align:center;padding:24px;color:var(--body)">No products match.</td></tr>';
+
+    document.querySelectorAll('[data-d]').forEach(function(b){
+      b.addEventListener('click', function(){
+        var i=+b.getAttribute('data-d');
+        if(!confirm('Delete "'+C.products[i].name+'"?')) return;
+        var arr=C.products.slice(); arr.splice(i,1); save('products',arr); renderProducts();
+      });
+    });
+    document.querySelectorAll('[data-e]').forEach(function(b){
+      b.addEventListener('click', function(){
+        var i=+b.getAttribute('data-e'), p=C.products[i];
+        document.getElementById('pn').value=p.name;
+        document.getElementById('pc').value=p.cat;
+        document.getElementById('ps').value=p.spec||'';
+        editIdx=i;
+        document.getElementById('padd').textContent='Save changes';
+        document.getElementById('pcancel').style.display='';
+        window.scrollTo({top:0,behavior:'smooth'});
+      });
+    });
+  }
+
+  document.getElementById('padd').addEventListener('click', function(){
+    var n=document.getElementById('pn').value.trim();
+    if(!n){ document.getElementById('pmsg').textContent='Enter a product name.'; return; }
+    readFile(document.getElementById('pf'), function(dataUrl){
+      var arr=C.products.slice();
+      var rec={ name:n, cat:document.getElementById('pc').value,
+                spec:document.getElementById('ps').value.trim(), img:dataUrl||'' };
+      if(editIdx>-1){ if(!dataUrl) rec.img=arr[editIdx].img||''; arr[editIdx]=rec; }
+      else arr.push(rec);
+      save('products',arr);
+      document.getElementById('pmsg').textContent = editIdx>-1 ? '✓ Updated' : '✓ Added';
+      editIdx=-1;
+      document.getElementById('padd').textContent='Add product';
+      document.getElementById('pcancel').style.display='none';
+      ['pn','ps'].forEach(function(id){document.getElementById(id).value='';});
+      document.getElementById('pf').value='';
+      renderProducts();
+      setTimeout(function(){document.getElementById('pmsg').textContent='';},2200);
+    });
+  });
+  document.getElementById('pcancel').addEventListener('click', function(){
+    editIdx=-1; document.getElementById('padd').textContent='Add product';
+    this.style.display='none'; ['pn','ps'].forEach(function(id){document.getElementById(id).value='';});
+  });
+  document.getElementById('pq').addEventListener('input', renderProducts);
+  document.getElementById('pfilter').addEventListener('change', renderProducts);
+
+  /* ================= CATEGORIES ================= */
+  function renderCats(){
+    document.getElementById('ctbody').innerHTML = C.categories.map(function(c,i){
+      var n = C.products.filter(function(p){return p.cat===c.id;}).length;
+      var src = (c.img||'').indexOf('data:')===0 ? c.img : 'assets/img/'+c.img;
+      return '<tr><td>'+img(src,c.label)+'</td><td><b>'+c.label+'</b></td>'+
+        '<td style="color:var(--body);font-size:12.5px">'+c.blurb+'</td><td>'+n+'</td>'+
+        '<td><button class="rowbtn del" data-dc="'+i+'">Delete</button></td></tr>';
+    }).join('');
+    document.querySelectorAll('[data-dc]').forEach(function(b){
+      b.addEventListener('click', function(){
+        var i=+b.getAttribute('data-dc'), c=C.categories[i];
+        var n = C.products.filter(function(p){return p.cat===c.id;}).length;
+        if(!confirm('Delete category "'+c.label+'"?'+(n?' '+n+' products will be left without a category.':''))) return;
+        var arr=C.categories.slice(); arr.splice(i,1); save('categories',arr); renderCats(); catOptions(document.getElementById('pc'),false); catOptions(document.getElementById('pfilter'),true);
+      });
+    });
+  }
+  document.getElementById('cadd').addEventListener('click', function(){
+    var n=document.getElementById('cn').value.trim();
+    if(!n){ document.getElementById('cmsg').textContent='Enter a category name.'; return; }
+    readFile(document.getElementById('cimg'), function(dataUrl){
+      var id = n.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+      var arr=C.categories.slice();
+      arr.push({ id:id, label:n, blurb:document.getElementById('cb').value.trim()||n,
+                 short:document.getElementById('cb').value.trim()||n, chip:'Range',
+                 img:dataUrl||'cat-fresh.jpg', href:'category.html?c='+id });
+      save('categories',arr);
+      document.getElementById('cmsg').textContent='✓ Added';
+      document.getElementById('cn').value=''; document.getElementById('cb').value=''; document.getElementById('cimg').value='';
+      renderCats(); catOptions(document.getElementById('pc'),false); catOptions(document.getElementById('pfilter'),true);
+      setTimeout(function(){document.getElementById('cmsg').textContent='';},2200);
+    });
+  });
+
+  /* ================= CERTIFICATES ================= */
+  function renderCerts(){
+    ['certificates','policies'].forEach(function(key){
+      var tb = document.getElementById(key==='certificates'?'certbody':'polbody');
+      tb.innerHTML = (C[key]||[]).map(function(c,i){
+        return '<tr><td>'+img(c.img,c.title)+'</td><td><b>'+esc(c.title)+'</b></td><td>'+esc(c.issuer||'')+'</td>'+
+          '<td>'+esc(c.status||'')+'</td><td><button class="rowbtn del" data-dk="'+key+'" data-di="'+i+'">Delete</button></td></tr>';
+      }).join('') || '<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--body)">None added yet.</td></tr>';
+    });
+    document.querySelectorAll('[data-dk]').forEach(function(b){
+      b.addEventListener('click', function(){
+        var k=b.getAttribute('data-dk'), i=+b.getAttribute('data-di');
+        if(!confirm('Delete "'+C[k][i].title+'"?')) return;
+        var arr=C[k].slice(); arr.splice(i,1); save(k,arr); renderCerts();
+      });
+    });
+  }
+  document.getElementById('certadd').addEventListener('click', function(){
+    var t=document.getElementById('cert-t').value.trim();
+    if(!t){ document.getElementById('certmsg').textContent='Enter a title.'; return; }
+    readFile(document.getElementById('cert-f'), function(dataUrl){
+      var key=document.getElementById('cert-g').value;
+      var arr=(C[key]||[]).slice();
+      arr.push({ title:t, issuer:document.getElementById('cert-i').value.trim(),
+                 status:document.getElementById('cert-s').value.trim()||'Current', img:dataUrl||'' });
+      save(key,arr);
+      document.getElementById('certmsg').textContent='✓ Added';
+      ['cert-t','cert-i','cert-s'].forEach(function(id){document.getElementById(id).value='';});
+      document.getElementById('cert-f').value='';
+      renderCerts();
+      setTimeout(function(){document.getElementById('certmsg').textContent='';},2200);
+    });
+  });
+
+  /* ================= VIDEOS ================= */
+  function renderVids(){
+    document.getElementById('vbody').innerHTML = (C.videos||[]).map(function(v,i){
+      return '<tr><td><b>'+esc(v.title)+'</b><div style="font-size:12px;color:var(--body)">'+esc(v.desc||'')+'</div></td>'+
+        '<td>'+esc(v.group)+'</td><td style="font-size:12px;word-break:break-all">'+(v.url?esc(v.url):'<i style="color:var(--body)">no link yet</i>')+'</td>'+
+        '<td><button class="rowbtn del" data-dv="'+i+'">Delete</button></td></tr>';
+    }).join('') || '<tr><td colspan="4" style="text-align:center;padding:20px;color:var(--body)">None added yet.</td></tr>';
+    document.querySelectorAll('[data-dv]').forEach(function(b){
+      b.addEventListener('click', function(){
+        var i=+b.getAttribute('data-dv');
+        if(!confirm('Delete "'+C.videos[i].title+'"?')) return;
+        var arr=C.videos.slice(); arr.splice(i,1); save('videos',arr); renderVids();
+      });
+    });
+  }
+  document.getElementById('vadd').addEventListener('click', function(){
+    var t=document.getElementById('v-t').value.trim();
+    if(!t){ document.getElementById('vmsg').textContent='Enter a title.'; return; }
+    var arr=(C.videos||[]).slice();
+    arr.push({ group:document.getElementById('v-g').value, title:t,
+               url:document.getElementById('v-u').value.trim(), desc:document.getElementById('v-d').value.trim() });
+    save('videos',arr);
+    document.getElementById('vmsg').textContent='✓ Added';
+    ['v-t','v-u','v-d'].forEach(function(id){document.getElementById(id).value='';});
+    renderVids();
+    setTimeout(function(){document.getElementById('vmsg').textContent='';},2200);
+  });
+
+  /* ================= HERO ================= */
+  function renderHero(){
+    document.getElementById('herobox').innerHTML = C.hero.map(function(h,i){
+      return '<div class="box" style="background:var(--cream);margin-bottom:14px"><b style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--ochre)">SLIDE '+(i+1)+'</b>'+
+        '<div class="fr" style="margin-top:12px">'+
+        '<div class="fld"><label>Small tag</label><input data-h="'+i+'" data-k="tag" value="'+esc(h.tag)+'"></div>'+
+        '<div class="fld"><label>Headline line 1</label><input data-h="'+i+'" data-k="line1" value="'+esc(h.line1)+'"></div>'+
+        '<div class="fld"><label>Headline line 2</label><input data-h="'+i+'" data-k="line2" value="'+esc(h.line2)+'"></div>'+
+        '<div class="fld"><label>Highlighted word</label><input data-h="'+i+'" data-k="accent" value="'+esc(h.accent||'')+'"></div>'+
+        '<div class="fld" style="grid-column:1/-1"><label>Body text</label><textarea data-h="'+i+'" data-k="body">'+esc(h.body)+'</textarea></div>'+
+        '<div class="fld"><label>Button 1 label</label><input data-h="'+i+'" data-k="cta1" value="'+esc(h.cta1)+'"></div>'+
+        '<div class="fld"><label>Button 1 link</label><input data-h="'+i+'" data-k="cta1href" value="'+esc(h.cta1href)+'"></div>'+
+        '<div class="fld"><label>Button 2 label</label><input data-h="'+i+'" data-k="cta2" value="'+esc(h.cta2)+'"></div>'+
+        '<div class="fld"><label>Button 2 link</label><input data-h="'+i+'" data-k="cta2href" value="'+esc(h.cta2href)+'"></div>'+
+        '<div class="fld"><label>Background image</label><input type="file" data-hf="'+i+'" accept="image/*"></div>'+
+        '</div></div>';
+    }).join('');
+  }
+  document.getElementById('hsave').addEventListener('click', function(){
+    var arr = C.hero.map(function(h){return Object.assign({},h);});
+    document.querySelectorAll('[data-h]').forEach(function(el){
+      arr[+el.getAttribute('data-h')][el.getAttribute('data-k')] = el.value;
+    });
+    var files = Array.prototype.slice.call(document.querySelectorAll('[data-hf]'))
+      .filter(function(f){return f.files && f.files[0];});
+    var pending = files.length;
+    function done(){ save('hero',arr); document.getElementById('hmsg').textContent='✓ Saved';
+      setTimeout(function(){document.getElementById('hmsg').textContent='';},2200); }
+    if(!pending) return done();
+    files.forEach(function(f){
+      readFile(f, function(u){ if(u) arr[+f.getAttribute('data-hf')].img = u; if(!--pending) done(); });
+    });
+  });
+
+  /* ================= MARKETS ================= */
+  function renderMkt(){
+    document.getElementById('mktbox').innerHTML = (C.markets||[]).map(function(m,i){
+      return '<div class="box" style="background:var(--cream);margin-bottom:14px">'+
+        '<div class="fr"><div class="fld"><label>Label</label><input data-m="'+i+'" data-k="chip" value="'+esc(m.chip)+'"></div>'+
+        '<div class="fld" style="grid-column:span 2"><label>Title</label><input data-m="'+i+'" data-k="title" value="'+esc(m.title)+'"></div></div>'+
+        '<div class="fld"><label>Description</label><textarea data-m="'+i+'" data-k="body">'+esc(m.body)+'</textarea></div>'+
+        '<button class="rowbtn del" data-dm="'+i+'" style="margin-top:10px">Remove sector</button></div>';
+    }).join('');
+    document.querySelectorAll('[data-dm]').forEach(function(b){
+      b.addEventListener('click', function(){
+        var arr=C.markets.slice(); arr.splice(+b.getAttribute('data-dm'),1); save('markets',arr); renderMkt();
+      });
+    });
+  }
+  document.getElementById('msave').addEventListener('click', function(){
+    var arr=C.markets.map(function(m){return Object.assign({},m);});
+    document.querySelectorAll('[data-m]').forEach(function(el){
+      arr[+el.getAttribute('data-m')][el.getAttribute('data-k')] = el.value;
+    });
+    save('markets',arr); document.getElementById('mmsg').textContent='✓ Saved';
+    setTimeout(function(){document.getElementById('mmsg').textContent='';},2200);
+  });
+  document.getElementById('madd').addEventListener('click', function(){
+    var arr=(C.markets||[]).slice();
+    arr.push({chip:'New',title:'New sector',body:'Describe this market.'});
+    save('markets',arr); renderMkt();
+  });
+
+  /* ================= PUBLISH ================= */
+  function refreshExport(){ document.getElementById('exportOut').value = window.FNFF.exportFile(); }
+  document.getElementById('dl').addEventListener('click', function(){
+    var blob = new Blob([window.FNFF.exportFile()], {type:'text/javascript'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = 'content.js';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    window.fnffToast('content.js downloaded — replace data/content.js on the server');
+  });
+  document.getElementById('cp').addEventListener('click', function(){
+    var ta=document.getElementById('exportOut'); ta.select();
+    try{ navigator.clipboard.writeText(ta.value); window.fnffToast('Copied to clipboard'); }
+    catch(e){ document.execCommand('copy'); window.fnffToast('Copied'); }
+  });
+  document.getElementById('rs').addEventListener('click', function(){
+    if(!confirm('Discard every change made in this browser and return to the published content?')) return;
+    window.FNFF.resetAll(); location.reload();
+  });
+
+  /* ---- boot ---- */
+  catOptions(document.getElementById('pc'), false);
+  catOptions(document.getElementById('pfilter'), true);
+  renderProducts(); renderCats(); renderCerts(); renderVids(); renderHero(); renderMkt(); refreshExport();
+})();
+</script>
+</body>
+</html>
