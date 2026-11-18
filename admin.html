@@ -60,7 +60,14 @@
     <button class="tb" data-p="certs">Certificates &amp; Policies</button>
     <button class="tb" data-p="videos">Videos</button>
     <button class="tb" data-p="hero">Home Slider</button>
+    <button class="tb" data-p="images">Page Images</button>
     <button class="tb" data-p="markets">Markets</button>
+    <button class="tb" data-p="text">Page Text</button>
+    <button class="tb" data-p="menu">Menu &amp; Pages</button>
+    <button class="tb" data-p="programs">Programs</button>
+    <button class="tb" data-p="seo">SEO</button>
+    <button class="tb" data-p="look">Appearance</button>
+    <button class="tb" data-p="settings">Settings</button>
     <button class="tb" data-p="publish">Publish</button>
   </div>
 
@@ -73,7 +80,7 @@
         <div class="fld"><label>Product name</label><input id="pn" placeholder="e.g. Carrot Julienne"></div>
         <div class="fld"><label>Category</label><select id="pc"></select></div>
         <div class="fld"><label>Specification shown on the card</label><input id="ps" placeholder="e.g. Cut to order — specify size"></div>
-        <div class="fld"><label>Image (optional)</label><input type="file" id="pf" accept="image/*"></div>
+        <div class="fld"><label>Image (optional) <span style="font-weight:400;color:var(--body)">— 640×480, 4:3</span></label><input type="file" id="pf" accept="image/*"><input class="urlbox" placeholder="or type a filename already on the server, e.g. products/carrot.jpg" style="margin-top:6px;font-family:var(--mono);font-size:11.5px"></div>
       </div>
       <div class="ar">
         <button class="btn btn-p btn-sm" id="padd">Add product</button>
@@ -104,7 +111,7 @@
       <div class="fr">
         <div class="fld"><label>Category name</label><input id="cn" placeholder="e.g. Microgreens"></div>
         <div class="fld"><label>Short description</label><input id="cb" placeholder="One line shown on the tile"></div>
-        <div class="fld"><label>Tile image</label><input type="file" id="cimg" accept="image/*"></div>
+        <div class="fld"><label>Tile image <span style="font-weight:400;color:var(--body)">— 900×675, 4:3</span></label><input type="file" id="cimg" accept="image/*"><input class="urlbox" placeholder="or type a filename already on the server, e.g. products/carrot.jpg" style="margin-top:6px;font-family:var(--mono);font-size:11.5px"></div>
       </div>
       <div class="ar"><button class="btn btn-p btn-sm" id="cadd">Add category</button>
       <span id="cmsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span></div>
@@ -128,7 +135,7 @@
         <div class="fld"><label>Issued by</label><input id="cert-i" placeholder="e.g. SAI Global"></div>
         <div class="fld"><label>Status</label><input id="cert-s" placeholder="e.g. Current, or In final approval"></div>
         <div class="fld"><label>Shows on</label><select id="cert-g"><option value="certificates">Certificates</option><option value="policies">Policies</option></select></div>
-        <div class="fld"><label>Certificate image / scan</label><input type="file" id="cert-f" accept="image/*"></div>
+        <div class="fld"><label>Certificate image / scan</label><input type="file" id="cert-f" accept="image/*"><input class="urlbox" placeholder="or type a filename already on the server, e.g. products/carrot.jpg" style="margin-top:6px;font-family:var(--mono);font-size:11.5px"></div>
       </div>
       <div class="ar"><button class="btn btn-p btn-sm" id="certadd">Add</button>
       <span id="certmsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span></div>
@@ -188,12 +195,281 @@
     </div>
   </section>
 
+  <!-- ============ PAGE IMAGES ============ -->
+  <section class="panel" id="p-images">
+    <div class="box">
+      <div class="warn"><b>The photograph behind the title on each page.</b> Upload a new one and it replaces the
+      header on that page only. The home page uses the slider instead &mdash; that is on the Home Slider tab, and the
+      product division headers are on the Categories tab.</div>
+      <h3>Recommended sizes</h3>
+      <p class="hint">The site works with any size, but these give the sharpest result on a large monitor without
+      making the page slow. Always landscape &mdash; a portrait photograph will be cropped top and bottom.</p>
+      <div class="tablewrap" style="max-height:none">
+        <table><thead><tr><th>Where</th><th style="width:170px">Size</th><th style="width:110px">Shape</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><b>Home slider</b></td><td><code>1920 &times; 860</code></td><td>2.2 : 1</td>
+            <td>Widest image on the site. Keep the subject right of centre &mdash; the text panel covers the left half.</td></tr>
+          <tr><td><b>Page header</b></td><td><code>1440 &times; 640</code></td><td>2.25 : 1</td>
+            <td>Same rule: the title panel sits over the left half.</td></tr>
+          <tr><td><b>Product division tile</b></td><td><code>900 &times; 675</code></td><td>4 : 3</td>
+            <td>Shown on the Products page and in the home carousel.</td></tr>
+          <tr><td><b>Product photograph</b></td><td><code>640 &times; 480</code></td><td>4 : 3</td>
+            <td>Fill the frame with the product. Anything larger is wasted.</td></tr>
+          <tr><td><b>Certificate or policy</b></td><td><code>850</code> wide</td><td>any</td>
+            <td>A straight scan of the certificate. Height can be whatever the document is.</td></tr>
+          <tr><td><b>Program gallery image</b></td><td><code>900 &times; 675</code></td><td>4 : 3</td>
+            <td>Health &amp; Safety and Modern Slavery pages.</td></tr>
+          <tr><td><b>Organisation chart</b></td><td><code>1400</code> wide</td><td>any</td>
+            <td>Shown full width, so make it wide enough to read the names.</td></tr>
+          <tr><td><b>Own-label product</b></td><td><code>600 &times; 800</code></td><td>3 : 4 upright</td>
+            <td>The only upright image on the site &mdash; it shows the jar or pack label.</td></tr>
+        </tbody></table>
+      </div>
+      <p class="hint" style="margin-top:14px"><b>Keep each file under about 400&nbsp;KB.</b> Save as JPEG at around
+      80% quality. A photograph straight off a phone is often 4&ndash;8&nbsp;MB, which makes the page slow to load
+      on a mobile connection for no visible gain.</p>
+    </div>
+
+    <div class="box">
+      <h3>Page headers</h3>
+      <p class="hint">Upload a replacement for any page. Click Restore to go back to the one supplied.</p>
+      <div id="pimgbox"></div>
+    </div>
+  </section>
+
+  <!-- ============ PAGE TEXT ============ -->
+  <section class="panel" id="p-text">
+    <div class="box">
+      <div class="warn"><b>Every piece of text on the site.</b> Headings, intro lines, card text, the scrolling
+      strip and the Acknowledgement of Country. Change anything here and it updates on the page. If you would
+      rather edit in place, open any page and add <code>?edit=1</code> to the address.</div>
+      <h3>Scrolling strip <span class="pill2">below the home slider</span></h3>
+      <p class="hint">One line per item. These scroll continuously across the green band on the home page.</p>
+      <div class="fld"><label>Items</label><textarea id="tickbox" style="min-height:150px"></textarea></div>
+      <div class="ar" style="margin-top:12px"><button class="btn btn-p btn-sm" id="ticksave">Save strip</button>
+      <span id="tickmsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span></div>
+    </div>
+
+    <div class="box">
+      <h3>Acknowledgement of Country</h3>
+      <p class="hint">Shown on the home page directly beneath the hero.</p>
+      <div class="fld" style="margin-bottom:12px"><label>Heading</label><input id="ackt"></div>
+      <div class="fld" style="margin-bottom:12px"><label>Wording</label><textarea id="ackb"></textarea></div>
+      <div class="fld"><label>Badge on the right</label><input id="ackbd"></div>
+      <div class="ar" style="margin-top:12px"><button class="btn btn-p btn-sm" id="acksave">Save acknowledgement</button>
+      <span id="ackmsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span></div>
+    </div>
+
+    <div class="box">
+      <h3>All page text <span class="pill2" id="txtcnt"></span></h3>
+      <p class="hint">Pick a page, then edit any block on it. Blocks you have already changed are marked.</p>
+      <div class="fr" style="grid-template-columns:300px 1fr;margin-bottom:6px">
+        <div class="fld"><label>Page</label><select id="txtpage"></select></div>
+        <div class="fld"><label>Find a block</label><input id="txtq" placeholder="Type a few words to filter"></div>
+      </div>
+      <div id="txtbox"></div>
+      <div class="ar" style="margin-top:14px">
+        <button class="btn btn-p btn-sm" id="txtsave">Save this page's text</button>
+        <button class="btn btn-o btn-sm" id="txtreset">Restore this page's original text</button>
+        <span id="txtmsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MENU & PAGES ============ -->
+  <section class="panel" id="p-menu">
+    <div class="box">
+      <h3>Main menu</h3>
+      <p class="hint">Rename, reorder, remove or add menu items and sub-items. Changes apply to the header, the
+      mobile menu and every page at once. A link can point at a page in the site, at a page you create below, or
+      at a full web address.</p>
+      <div id="menubox"></div>
+      <div class="ar" style="margin-top:14px">
+        <button class="btn btn-p btn-sm" id="navsave">Save menu</button>
+        <button class="btn btn-g btn-sm" id="navadd">Add menu item</button>
+        <button class="btn btn-o btn-sm" id="navreset">Reset to default</button>
+        <span id="navmsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span>
+      </div>
+    </div>
+
+    <div class="box">
+      <h3>Create a page</h3>
+      <p class="hint">A new page is published straight away at its own address. Add it to the menu above using the
+      link shown beside it in the list.</p>
+      <div class="fr">
+        <div class="fld"><label>Page title</label><input id="npt" placeholder="e.g. Sustainability"></div>
+        <div class="fld"><label>Address (letters and hyphens)</label><input id="nps" placeholder="sustainability"></div>
+        <div class="fld"><label>Kicker above the title</label><input id="npk" placeholder="e.g. Our approach"></div>
+      </div>
+      <div class="fld" style="margin-bottom:14px"><label>Intro line under the title</label><input id="npl" placeholder="One sentence introducing the page"></div>
+      <div class="ar"><button class="btn btn-p btn-sm" id="npadd">Create page</button>
+      <span id="npmsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span></div>
+    </div>
+
+    <div class="box">
+      <h3>Your pages <span class="pill2" id="pgcnt"></span></h3>
+      <p class="hint">Edit the content of a page you created. Built-in pages are edited on the page itself using
+      <b>Edit page text</b> at the top of this screen.</p>
+      <div id="pagesbox"></div>
+    </div>
+  </section>
+
+  <!-- ============ PROGRAMS ============ -->
+  <section class="panel" id="p-programs">
+    <div class="box">
+      <h3>Health &amp; Safety and Modern Slavery pages</h3>
+      <p class="hint">Edit the introduction and the program points, and upload images and documents for each page.</p>
+      <div class="fld" style="max-width:340px"><label>Page</label>
+        <select id="progsel">
+          <option value="health-safety">Health &amp; Safety Program</option>
+          <option value="modern-slavery">Modern Slavery Program</option>
+        </select></div>
+    </div>
+    <div class="box">
+      <h3>Introduction</h3>
+      <div class="fld"><label>Opening paragraph</label><textarea id="progintro"></textarea></div>
+      <div class="ar" style="margin-top:12px"><button class="btn btn-p btn-sm" id="progsave">Save introduction</button>
+      <span id="progmsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span></div>
+    </div>
+    <div class="box">
+      <h3>Program points</h3>
+      <p class="hint">Each point becomes a card on the page.</p>
+      <div id="progpts"></div>
+      <div class="ar" style="margin-top:12px">
+        <button class="btn btn-p btn-sm" id="ptsave">Save points</button>
+        <button class="btn btn-g btn-sm" id="ptadd">Add a point</button>
+      </div>
+    </div>
+    <div class="box">
+      <h3>Images</h3>
+      <p class="hint">Uploaded images appear in a gallery on the page.</p>
+      <div class="fr">
+        <div class="fld"><label>Image <span style="font-weight:400;color:var(--body)">— 900×675, 4:3</span></label><input type="file" id="pgimgf" accept="image/*"><input class="urlbox" placeholder="or type a filename already on the server, e.g. products/carrot.jpg" style="margin-top:6px;font-family:var(--mono);font-size:11.5px"></div>
+        <div class="fld" style="grid-column:span 2"><label>Caption (optional)</label><input id="pgimgc" placeholder="What the image shows"></div>
+      </div>
+      <div class="ar" style="margin-bottom:16px"><button class="btn btn-p btn-sm" id="pgimgadd">Add image</button></div>
+      <div class="tablewrap">
+        <table><thead><tr><th style="width:62px">Image</th><th>Caption</th><th style="width:100px"></th></tr></thead>
+        <tbody id="pgimgtb"></tbody></table>
+      </div>
+    </div>
+    <div class="box">
+      <h3>Program documents</h3>
+      <p class="hint">Upload a scan or PDF and it is listed on the page with its title and status.</p>
+      <div class="fr">
+        <div class="fld"><label>Document title</label><input id="pdt" placeholder="e.g. Health &amp; Safety Policy"></div>
+        <div class="fld"><label>Issued by</label><input id="pdi" placeholder="e.g. Executive policy"></div>
+        <div class="fld"><label>Status</label><input id="pds" placeholder="e.g. Current"></div>
+        <div class="fld"><label>Preview image <span style="font-weight:400;color:var(--body)">— 850px wide</span></label><input type="file" id="pdf1" accept="image/*"><input class="urlbox" placeholder="or type a filename already on the server, e.g. documents/terms.pdf" style="margin-top:6px;font-family:var(--mono);font-size:11.5px"></div>
+        <div class="fld"><label>Document file (PDF)</label><input type="file" id="pdf2" accept=".pdf,application/pdf"><input class="urlbox" placeholder="or type a filename already on the server, e.g. documents/terms.pdf" style="margin-top:6px;font-family:var(--mono);font-size:11.5px"></div>
+      </div>
+      <div class="ar" style="margin-bottom:16px"><button class="btn btn-p btn-sm" id="pdadd">Add document</button></div>
+      <div class="tablewrap">
+        <table><thead><tr><th style="width:62px">Preview</th><th>Title</th><th style="width:150px">Issued by</th><th style="width:120px">Status</th><th style="width:100px"></th></tr></thead>
+        <tbody id="pdtb"></tbody></table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SEO ============ -->
+  <section class="panel" id="p-seo">
+    <div class="box">
+      <div class="warn"><b>What these do.</b> The title is the blue line Google shows in its results and the text in
+      the browser tab. The description is the grey paragraph beneath it. Aim for a title under 60 characters and a
+      description between 120 and 160 — the counters turn amber when you go over.</div>
+      <h3>Page titles and descriptions</h3>
+      <p class="hint">Every page in the site, including the pages you create yourself.</p>
+      <div id="seobox"></div>
+      <div class="ar" style="margin-top:14px"><button class="btn btn-p btn-sm" id="seosave">Save all SEO</button>
+      <span id="seomsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span></div>
+    </div>
+  </section>
+
+  <!-- ============ APPEARANCE ============ -->
+  <section class="panel" id="p-look">
+    <div class="box">
+      <div class="warn"><b>Live preview.</b> Colour changes apply across the whole site as soon as you save. Use
+      <b>Reset colours</b> to return to the approved brand palette at any time.</div>
+      <h3>Brand colours</h3>
+      <p class="hint">These are the approved artwork colours. Change one here and every heading, button, band and
+      card that uses it updates together.</p>
+      <div id="colbox" class="fr"></div>
+    </div>
+    <div class="box">
+      <h3>Boxes and cards</h3>
+      <p class="hint">The background and border of product cards, certificate cards and panels.</p>
+      <div id="boxbox" class="fr"></div>
+    </div>
+    <div class="box">
+      <h3>Text panels over photographs</h3>
+      <p class="hint">Shadows have been removed so photographs stay sharp, so the text on the home slider and on
+      page titles sits on its own panel. Set the panel colour and how solid it is — a higher figure means more
+      solid and easier to read, a lower figure lets more of the photograph through.</p>
+      <div id="panelbox" class="fr"></div>
+      <div class="ar" style="margin-top:16px">
+        <button class="btn btn-p btn-sm" id="looksave">Save appearance</button>
+        <button class="btn btn-o btn-sm" id="lookreset">Reset colours</button>
+        <span id="lookmsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SETTINGS ============ -->
+  <section class="panel" id="p-settings">
+    <div class="box">
+      <h3>Contact details</h3>
+      <p class="hint">Changing an address or number here updates the top bar, the footer and the contact page at
+      once. The email addresses are also where the enquiry form and the quote specification are delivered.</p>
+      <div id="setbox" class="fr"></div>
+    </div>
+    <div class="box">
+      <h3>Terms of Trade document</h3>
+      <p class="hint">Upload the document or paste a link to it. Once set, the Terms of Trade page shows
+      <b>View</b> and <b>Download</b> buttons instead of the request button.</p>
+      <div class="fr">
+        <div class="fld"><label>Upload the document (PDF)</label><input type="file" id="totf" accept=".pdf,application/pdf"><input class="urlbox" placeholder="or type a filename already on the server, e.g. documents/terms.pdf" style="margin-top:6px;font-family:var(--mono);font-size:11.5px"></div>
+        <div class="fld" style="grid-column:span 2"><label>…or paste a link</label><input id="toturl" placeholder="https://… or documents/terms-of-trade.pdf"></div>
+        <div class="fld"><label>Button label</label><input id="totlabel" placeholder="Terms of Trade (PDF)"></div>
+      </div>
+      <div class="ar"><button class="btn btn-o btn-sm" id="totclear">Remove document</button>
+      <span id="totmsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span></div>
+    </div>
+    <div class="box">
+      <h3>Organisation chart</h3>
+      <p class="hint">Upload the chart as an image and it appears at the top of the Organisation Chart page, above
+      the division cards. Leave it empty and only the division cards show.</p>
+      <div class="fr">
+        <div class="fld"><label>Chart image <span style="font-weight:400;color:var(--body)">— 1400px wide</span></label><input type="file" id="orgf" accept="image/*"><input class="urlbox" placeholder="or type a filename already on the server, e.g. products/carrot.jpg" style="margin-top:6px;font-family:var(--mono);font-size:11.5px"></div>
+        <div class="fld" style="grid-column:span 2"><label>Current</label><div id="orgprev" style="padding-top:6px"></div></div>
+      </div>
+      <div class="ar"><button class="btn btn-o btn-sm" id="orgclear">Remove chart</button></div>
+    </div>
+    <div class="box">
+      <h3>Form delivery</h3>
+      <div class="warn"><b>Sending straight from the website.</b> The enquiry form and the quote specification are
+      posted to <code>send.php</code>, which sends the email from the server. Nothing opens Gmail or Outlook.
+      Before go-live, open <code>send.php</code> and fill in the sending mailbox and password near the top of the
+      file. Until that is done the forms still work, but mail is more likely to be filtered as spam.</div>
+      <div class="fr">
+        <div class="fld"><label>Form endpoint</label><input id="formep" placeholder="send.php"></div>
+      </div>
+      <div class="ar"><button class="btn btn-p btn-sm" id="setsave">Save settings</button>
+      <span id="setmsg" style="font-size:12.5px;font-weight:600;color:var(--euc)"></span></div>
+    </div>
+  </section>
+
   <!-- ============ PUBLISH ============ -->
   <section class="panel" id="p-publish">
     <div class="box">
       <div class="warn"><b>How saving works.</b> Changes are held in this browser straight away, so you can review the live
       site immediately. To make them permanent for everyone, download the content file below and replace
       <code>data/content.js</code> on the server. On WordPress this step disappears — saving writes to the database directly.</div>
+      <div class="warn" style="background:var(--ochre-lt);border-left-color:var(--ochre)"><b>Two ways to add an image.</b>
+      Beside every file picker there is a box for a filename. Putting images into <code>assets/img/</code> with GoDaddy
+      File Manager or FTP and typing the filename is the better way: it works for any number of images and costs nothing.
+      Choosing a file instead stores the whole image inside the content file, and the browser only allows about 5 MB of
+      unpublished changes in total — fine for one or two, not for a batch. The bar below shows how much is used.</div>
+      <div id="storagebar" style="margin:14px 0 18px"></div>
       <h3>Publish your changes</h3>
       <p class="hint">Download the updated content file, or copy it to the clipboard.</p>
       <div class="ar" style="margin-bottom:16px">
@@ -207,6 +483,7 @@
 </div>
 
 <script src="data/content.js"></script>
+<script src="data/textindex.js"></script>
 <script src="assets/js/site.js"></script>
 <script>
 (function(){
@@ -215,14 +492,92 @@
   var S = document.getElementById('status');
   function mark(){ S.textContent = 'unsaved changes'; S.style.background='var(--ochre-lt)'; S.style.color='var(--ochre-dk)'; }
   function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-  function save(key,val){ window.FNFF.replaceSection(key,val); C = window.FNFF.get(); mark(); refreshExport(); }
-  function img(src,alt){ return src ? '<img class="thumb" src="'+esc(src)+'" alt="'+esc(alt)+'">' : '<div class="thumb-ph">none</div>'; }
+  function save(key,val){
+    var ok = window.FNFF.replaceSection(key,val);
+    C = window.FNFF.get(); mark(); refreshExport(); storageMeter();
+    if(!ok){
+      alert('That change could NOT be saved.\n\n'
+        + 'The browser allows about 5 MB of saved changes per site, and that is now full. '
+        + 'Images chosen with the file picker are stored inside that allowance, so a few '
+        + 'large ones fill it.\n\nWhat to do:\n'
+        + '  1. Publish what you have (Publish tab -> Download content.js, upload it to data/).\n'
+        + '  2. Then use Discard all changes to clear the allowance.\n'
+        + '  3. From now on put images in assets/img/ with File Manager or FTP and type the '
+        + 'filename in the box beside the file picker. A filename costs nothing.');
+      return false;
+    }
+    return true;
+  }
+
+  function storageMeter(){
+    var el = document.getElementById('storagebar');
+    if(!el) return;
+    var s = window.FNFF.storage();
+    var kb = Math.round(s.used/1024);
+    var col = s.pct > 85 ? 'var(--maroon)' : s.pct > 60 ? 'var(--ochre)' : 'var(--euc)';
+    el.innerHTML = '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px">'+
+      '<b>Unpublished changes held in this browser</b><span style="font-family:var(--mono)">'+
+      kb+' KB of about 5,120 KB ('+s.pct+'%)</span></div>'+
+      '<div style="height:8px;border-radius:5px;background:var(--sand-2);overflow:hidden">'+
+      '<div style="height:100%;width:'+s.pct+'%;background:'+col+'"></div></div>'+
+      (s.pct>60?'<p class="hint" style="margin-top:7px;color:'+col+'"><b>Getting full.</b> '+
+        'Publish, then Discard all changes to clear it. Use the filename box beside each '+
+        'file picker instead of embedding images.</p>':'');
+  }
+  function img(src,alt){
+    if(!src) return '<div class="thumb-ph">none</div>';
+    return '<img class="thumb" src="'+esc(window.FNFF.src(src))+'" alt="'+esc(alt)+'">';
+  }
+  /* ------------------------------------------------------------------
+     Reading an image field.
+     Every file picker may be paired with a text box carrying class
+     "urlbox". If that box has something in it, the filename or link is
+     used and nothing is embedded — which is how images uploaded by FTP
+     or GoDaddy File Manager are brought in. Otherwise the file itself
+     is read and stored inline, which is convenient but limited: see
+     the storage note in the Publish tab.
+     ------------------------------------------------------------------ */
+  var INLINE_WARN = 300 * 1024;   // a file bigger than this is worth a word
+
+  function companionUrl(input){
+    if(!input) return '';
+    var box = input.parentNode && input.parentNode.querySelector('.urlbox');
+    if(!box && input.id) box = document.querySelector('[data-url-for="'+input.id+'"]');
+    return box ? box.value.trim() : '';
+  }
+
+  function clearCompanion(input){
+    if(!input) return;
+    var box = input.parentNode && input.parentNode.querySelector('.urlbox');
+    if(!box && input.id) box = document.querySelector('[data-url-for="'+input.id+'"]');
+    if(box) box.value = '';
+  }
+
   function readFile(input, cb){
-    var f = input.files && input.files[0];
+    if(typeof input === 'string') input = document.getElementById(input);
+    var url = companionUrl(input);
+    if(url){ cb(url); return; }                     // a path or link wins
+    var f = input && input.files && input.files[0];
     if(!f){ cb(''); return; }
+    if(f.size > INLINE_WARN){
+      var mb = (f.size/1024/1024).toFixed(1);
+      if(!confirm(f.name + ' is ' + mb + ' MB.\n\nFiles chosen here are stored inside the '
+        + 'content file, and the browser only allows about 5 MB in total. A few large images '
+        + 'will fill that and later saves will fail.\n\nBetter: put the image in assets/img/ '
+        + 'with File Manager or FTP and type its filename in the box beside the file picker.'
+        + '\n\nUse this file anyway?')){ cb(''); return; }
+    }
     var r = new FileReader();
     r.onload = function(){ cb(r.result); };
     r.readAsDataURL(f);
+  }
+
+  /* a file picker and its companion path box, rendered together */
+  function imgField(label, id, hint, extraAttr){
+    return '<label>'+label+(hint?' <span style="font-weight:400;color:var(--body)">\u2014 '+hint+'</span>':'')+'</label>'+
+      '<input type="file" '+(id?'id="'+id+'" ':'')+(extraAttr||'')+' accept="image/*"><input class="urlbox" placeholder="or type a filename already on the server, e.g. products/carrot.jpg" style="margin-top:6px;font-family:var(--mono);font-size:11.5px">'+
+      '<input class="urlbox" placeholder="or type a filename already on the server, e.g. products/carrot.jpg" '+
+      'style="margin-top:6px;font-family:var(--mono);font-size:11.5px">';
   }
 
   /* ---- tabs ---- */
@@ -307,20 +662,69 @@
   document.getElementById('pfilter').addEventListener('change', renderProducts);
 
   /* ================= CATEGORIES ================= */
+  var catEdit = -1;
   function renderCats(){
     document.getElementById('ctbody').innerHTML = C.categories.map(function(c,i){
       var n = C.products.filter(function(p){return p.cat===c.id;}).length;
-      var src = (c.img||'').indexOf('data:')===0 ? c.img : 'assets/img/'+c.img;
-      return '<tr><td>'+img(src,c.label)+'</td><td><b>'+c.label+'</b></td>'+
-        '<td style="color:var(--body);font-size:12.5px">'+c.blurb+'</td><td>'+n+'</td>'+
-        '<td><button class="rowbtn del" data-dc="'+i+'">Delete</button></td></tr>';
+      if(i===catEdit){
+        return '<tr class="editrow"><td colspan="5"><div class="box" style="background:var(--cream);margin:0">'+
+          '<h3 style="margin-bottom:12px">Editing &ldquo;'+esc(c.label)+'&rdquo;</h3>'+
+          '<div class="fr"><div class="fld"><label>Name</label><input id="ce-label" value="'+esc(c.label)+'"></div>'+
+          '<div class="fld"><label>Chip above the name</label><input id="ce-chip" value="'+esc(c.chip||'')+'"></div>'+
+          '<div class="fld"><label>Short line (home carousel)</label><input id="ce-short" value="'+esc(c.short||'')+'"></div></div>'+
+          '<div class="fld" style="margin-bottom:14px"><label>Description shown on the division page</label>'+
+          '<textarea id="ce-blurb">'+esc(c.blurb||'')+'</textarea></div>'+
+          '<div class="fr">'+
+          '<div class="fld"><label>Tile on the Products page <span style="font-weight:400;color:var(--body)">\u2014 900\u00d7675</span></label>'+
+          img(c.img,c.label)+'<input type="file" id="ce-img" accept="image/*" style="margin-top:7px"><input class="urlbox" placeholder="or type a filename already on the server, e.g. products/carrot.jpg" style="margin-top:6px;font-family:var(--mono);font-size:11.5px"></div>'+
+          '<div class="fld"><label>Home range carousel <span style="font-weight:400;color:var(--body)">\u2014 900\u00d7675</span></label>'+
+          img(c.imgHome||c.img,c.label)+'<input type="file" id="ce-imgHome" accept="image/*" style="margin-top:7px"><input class="urlbox" placeholder="or type a filename already on the server, e.g. products/carrot.jpg" style="margin-top:6px;font-family:var(--mono);font-size:11.5px"></div>'+
+          '<div class="fld"><label>Division page header <span style="font-weight:400;color:var(--body)">\u2014 1440\u00d7640</span></label>'+
+          (c.header?img(c.header,c.label):'<div class="thumb-ph">uses the tile</div>')+
+          '<input type="file" id="ce-header" accept="image/*" style="margin-top:7px"><input class="urlbox" placeholder="or type a filename already on the server, e.g. products/carrot.jpg" style="margin-top:6px;font-family:var(--mono);font-size:11.5px"></div></div>'+
+          '<div class="ar" style="margin-top:14px"><button class="btn btn-p btn-sm" id="ce-save">Save changes</button>'+
+          '<button class="btn btn-o btn-sm" id="ce-cancel">Cancel</button></div></div></td></tr>';
+      }
+      return '<tr><td>'+img(c.img,c.label)+'</td><td><b>'+esc(c.label)+'</b>'+
+        '<div style="font-size:11px;color:var(--body);margin-top:2px"><code>'+esc(c.id)+'</code></div></td>'+
+        '<td style="color:var(--body);font-size:12.5px">'+esc(c.blurb||'')+'</td><td>'+n+'</td>'+
+        '<td style="white-space:nowrap"><button class="rowbtn" data-ec="'+i+'">Edit</button> '+
+        '<button class="rowbtn del" data-dc="'+i+'">Delete</button></td></tr>';
     }).join('');
+
+    document.querySelectorAll('[data-ec]').forEach(function(b){
+      b.addEventListener('click', function(){ catEdit=+b.getAttribute('data-ec'); renderCats(); });
+    });
     document.querySelectorAll('[data-dc]').forEach(function(b){
       b.addEventListener('click', function(){
         var i=+b.getAttribute('data-dc'), c=C.categories[i];
         var n = C.products.filter(function(p){return p.cat===c.id;}).length;
         if(!confirm('Delete category "'+c.label+'"?'+(n?' '+n+' products will be left without a category.':''))) return;
-        var arr=C.categories.slice(); arr.splice(i,1); save('categories',arr); renderCats(); catOptions(document.getElementById('pc'),false); catOptions(document.getElementById('pfilter'),true);
+        var arr=C.categories.slice(); arr.splice(i,1); save('categories',arr); catEdit=-1; renderCats();
+        catOptions(document.getElementById('pc'),false); catOptions(document.getElementById('pfilter'),true);
+      });
+    });
+
+    var cancel=document.getElementById('ce-cancel');
+    if(cancel) cancel.addEventListener('click', function(){ catEdit=-1; renderCats(); });
+    var sv=document.getElementById('ce-save');
+    if(sv) sv.addEventListener('click', function(){
+      var i=catEdit, arr=C.categories.map(function(x){return Object.assign({},x);});
+      arr[i].label = document.getElementById('ce-label').value.trim() || arr[i].label;
+      arr[i].chip  = document.getElementById('ce-chip').value.trim();
+      arr[i].short = document.getElementById('ce-short').value.trim();
+      arr[i].blurb = document.getElementById('ce-blurb').value.trim();
+      readFile(document.getElementById('ce-img'), function(a){
+        if(a) arr[i].img=a;
+        readFile(document.getElementById('ce-imgHome'), function(b2){
+          if(b2) arr[i].imgHome=b2;
+          readFile(document.getElementById('ce-header'), function(c3){
+            if(c3) arr[i].header=c3;
+            save('categories',arr); catEdit=-1; renderCats();
+            catOptions(document.getElementById('pc'),false); catOptions(document.getElementById('pfilter'),true);
+            window.fnffToast('Division updated');
+          });
+        });
       });
     });
   }
@@ -342,19 +746,61 @@
   });
 
   /* ================= CERTIFICATES ================= */
+  var certEdit = null;   // "certificates:3"
   function renderCerts(){
     ['certificates','policies'].forEach(function(key){
       var tb = document.getElementById(key==='certificates'?'certbody':'polbody');
       tb.innerHTML = (C[key]||[]).map(function(c,i){
-        return '<tr><td>'+img(c.img,c.title)+'</td><td><b>'+esc(c.title)+'</b></td><td>'+esc(c.issuer||'')+'</td>'+
-          '<td>'+esc(c.status||'')+'</td><td><button class="rowbtn del" data-dk="'+key+'" data-di="'+i+'">Delete</button></td></tr>';
+        if(certEdit === key+':'+i){
+          return '<tr class="editrow"><td colspan="5"><div class="box" style="background:var(--cream);margin:0">'+
+            '<h3 style="margin-bottom:12px">Editing &ldquo;'+esc(c.title)+'&rdquo;</h3>'+
+            '<div class="fr"><div class="fld"><label>Title</label><input id="ke-title" value="'+esc(c.title)+'"></div>'+
+            '<div class="fld"><label>Issued by</label><input id="ke-issuer" value="'+esc(c.issuer||'')+'"></div>'+
+            '<div class="fld"><label>Status</label><input id="ke-status" value="'+esc(c.status||'')+'"></div></div>'+
+            '<div class="fr"><div class="fld"><label>Preview image <span style="font-weight:400;color:var(--body)">\u2014 850px wide</span></label>'+
+            img(c.img,c.title)+'<input type="file" id="ke-img" accept="image/*" style="margin-top:7px"><input class="urlbox" placeholder="or type a filename already on the server, e.g. products/carrot.jpg" style="margin-top:6px;font-family:var(--mono);font-size:11.5px"></div>'+
+            '<div class="fld" style="grid-column:span 2"><label>Document file (PDF)'+
+            (c.file?' <span class="pill2">attached</span>':'')+'</label>'+
+            '<input type="file" id="ke-file" accept=".pdf,application/pdf"><input class="urlbox" placeholder="or type a filename already on the server, e.g. documents/terms.pdf" style="margin-top:6px;font-family:var(--mono);font-size:11.5px"></div></div>'+
+            '<div class="ar" style="margin-top:14px"><button class="btn btn-p btn-sm" id="ke-save">Save changes</button>'+
+            '<button class="btn btn-o btn-sm" id="ke-cancel">Cancel</button></div></div></td></tr>';
+        }
+        return '<tr><td>'+img(c.img,c.title)+'</td><td><b>'+esc(c.title)+'</b>'+
+          (c.file?' <span class="pill2">file</span>':'')+'</td><td>'+esc(c.issuer||'')+'</td>'+
+          '<td>'+esc(c.status||'')+'</td><td style="white-space:nowrap">'+
+          '<button class="rowbtn" data-ek="'+key+'" data-ei="'+i+'">Edit</button> '+
+          '<button class="rowbtn del" data-dk="'+key+'" data-di="'+i+'">Delete</button></td></tr>';
       }).join('') || '<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--body)">None added yet.</td></tr>';
+    });
+
+    document.querySelectorAll('[data-ek]').forEach(function(b){
+      b.addEventListener('click', function(){
+        certEdit = b.getAttribute('data-ek')+':'+b.getAttribute('data-ei'); renderCerts();
+      });
     });
     document.querySelectorAll('[data-dk]').forEach(function(b){
       b.addEventListener('click', function(){
         var k=b.getAttribute('data-dk'), i=+b.getAttribute('data-di');
         if(!confirm('Delete "'+C[k][i].title+'"?')) return;
-        var arr=C[k].slice(); arr.splice(i,1); save(k,arr); renderCerts();
+        var arr=C[k].slice(); arr.splice(i,1); save(k,arr); certEdit=null; renderCerts();
+      });
+    });
+
+    var cancel=document.getElementById('ke-cancel');
+    if(cancel) cancel.addEventListener('click', function(){ certEdit=null; renderCerts(); });
+    var sv=document.getElementById('ke-save');
+    if(sv) sv.addEventListener('click', function(){
+      var parts=certEdit.split(':'), k=parts[0], i=+parts[1];
+      var arr=C[k].map(function(x){return Object.assign({},x);});
+      arr[i].title  = document.getElementById('ke-title').value.trim() || arr[i].title;
+      arr[i].issuer = document.getElementById('ke-issuer').value.trim();
+      arr[i].status = document.getElementById('ke-status').value.trim();
+      readFile(document.getElementById('ke-img'), function(a){
+        if(a) arr[i].img=a;
+        readFile(document.getElementById('ke-file'), function(f){
+          if(f) arr[i].file=f;
+          save(k,arr); certEdit=null; renderCerts(); window.fnffToast('Saved');
+        });
       });
     });
   }
@@ -376,17 +822,56 @@
   });
 
   /* ================= VIDEOS ================= */
+  var vidEdit = -1;
   function renderVids(){
     document.getElementById('vbody').innerHTML = (C.videos||[]).map(function(v,i){
+      if(i===vidEdit){
+        return '<tr class="editrow"><td colspan="4"><div class="box" style="background:var(--cream);margin:0">'+
+          '<h3 style="margin-bottom:12px">Editing &ldquo;'+esc(v.title)+'&rdquo;</h3>'+
+          '<div class="fr"><div class="fld"><label>Title</label><input id="ve-title" value="'+esc(v.title)+'"></div>'+
+          '<div class="fld"><label>Page</label><select id="ve-group">'+
+          '<option value="facilities"'+(v.group==='facilities'?' selected':'')+'>Facilities</option>'+
+          '<option value="equipment"'+(v.group==='equipment'?' selected':'')+'>Processing Equipment</option>'+
+          '</select></div></div>'+
+          '<div class="fld" style="margin-bottom:12px"><label>Description</label>'+
+          '<textarea id="ve-desc">'+esc(v.desc||'')+'</textarea></div>'+
+          '<div class="fld" style="margin-bottom:12px"><label>YouTube or Vimeo link, or the path to a video file</label>'+
+          '<input id="ve-url" value="'+esc(v.url||'')+'" placeholder="https://www.youtube.com/watch?v=..."></div>'+
+          '<div class="fld"><label>Still image shown before play <span style="font-weight:400;color:var(--body)">\u2014 900\u00d7675</span></label>'+
+          (v.poster?img(v.poster,v.title):'<div class="thumb-ph">none</div>')+
+          '<input type="file" id="ve-poster" accept="image/*" style="margin-top:7px"><input class="urlbox" placeholder="or type a filename already on the server, e.g. products/carrot.jpg" style="margin-top:6px;font-family:var(--mono);font-size:11.5px"></div>'+
+          '<div class="ar" style="margin-top:14px"><button class="btn btn-p btn-sm" id="ve-save">Save changes</button>'+
+          '<button class="btn btn-o btn-sm" id="ve-cancel">Cancel</button></div></div></td></tr>';
+      }
       return '<tr><td><b>'+esc(v.title)+'</b><div style="font-size:12px;color:var(--body)">'+esc(v.desc||'')+'</div></td>'+
         '<td>'+esc(v.group)+'</td><td style="font-size:12px;word-break:break-all">'+(v.url?esc(v.url):'<i style="color:var(--body)">no link yet</i>')+'</td>'+
-        '<td><button class="rowbtn del" data-dv="'+i+'">Delete</button></td></tr>';
+        '<td style="white-space:nowrap"><button class="rowbtn" data-ev="'+i+'">Edit</button> '+
+        '<button class="rowbtn del" data-dv="'+i+'">Delete</button></td></tr>';
     }).join('') || '<tr><td colspan="4" style="text-align:center;padding:20px;color:var(--body)">None added yet.</td></tr>';
+
+    document.querySelectorAll('[data-ev]').forEach(function(b){
+      b.addEventListener('click', function(){ vidEdit=+b.getAttribute('data-ev'); renderVids(); });
+    });
     document.querySelectorAll('[data-dv]').forEach(function(b){
       b.addEventListener('click', function(){
         var i=+b.getAttribute('data-dv');
         if(!confirm('Delete "'+C.videos[i].title+'"?')) return;
-        var arr=C.videos.slice(); arr.splice(i,1); save('videos',arr); renderVids();
+        var arr=C.videos.slice(); arr.splice(i,1); save('videos',arr); vidEdit=-1; renderVids();
+      });
+    });
+
+    var cancel=document.getElementById('ve-cancel');
+    if(cancel) cancel.addEventListener('click', function(){ vidEdit=-1; renderVids(); });
+    var sv=document.getElementById('ve-save');
+    if(sv) sv.addEventListener('click', function(){
+      var i=vidEdit, arr=C.videos.map(function(x){return Object.assign({},x);});
+      arr[i].title = document.getElementById('ve-title').value.trim() || arr[i].title;
+      arr[i].group = document.getElementById('ve-group').value;
+      arr[i].desc  = document.getElementById('ve-desc').value.trim();
+      arr[i].url   = document.getElementById('ve-url').value.trim();
+      readFile(document.getElementById('ve-poster'), function(a){
+        if(a) arr[i].poster=a;
+        save('videos',arr); vidEdit=-1; renderVids(); window.fnffToast('Video updated');
       });
     });
   }
@@ -417,7 +902,7 @@
         '<div class="fld"><label>Button 1 link</label><input data-h="'+i+'" data-k="cta1href" value="'+esc(h.cta1href)+'"></div>'+
         '<div class="fld"><label>Button 2 label</label><input data-h="'+i+'" data-k="cta2" value="'+esc(h.cta2)+'"></div>'+
         '<div class="fld"><label>Button 2 link</label><input data-h="'+i+'" data-k="cta2href" value="'+esc(h.cta2href)+'"></div>'+
-        '<div class="fld"><label>Background image</label><input type="file" data-hf="'+i+'" accept="image/*"></div>'+
+        '<div class="fld"><label>Background image <span style="font-weight:400;color:var(--body)">— 1920×860</span></label><input type="file" data-hf="'+i+'" accept="image/*"><input class="urlbox" placeholder="or type a filename already on the server, e.g. products/carrot.jpg" style="margin-top:6px;font-family:var(--mono);font-size:11.5px"></div>'+
         '</div></div>';
     }).join('');
   }
@@ -466,6 +951,531 @@
     save('markets',arr); renderMkt();
   });
 
+  /* ================= PAGE IMAGES ================= */
+  var PAGE_LABELS = {
+    'company-profile.html':'Company Profile','vision.html':'Our Vision','mission.html':'Our Mission',
+    'organisation.html':'Organisation Chart','terms-of-trade.html':'Terms of Trade',
+    'products.html':'Product Catalogue','own-label.html':'Our Own Label','facilities.html':'Facilities',
+    'equipment.html':'Processing Equipment','quality.html':'Quality & Safety',
+    'certifications.html':'Certifications','policies.html':'Policies',
+    'health-safety.html':'Health & Safety Program','modern-slavery.html':'Modern Slavery Program',
+    'markets.html':'Markets We Serve','contact.html':'Contact','marketing-media.html':'Marketing Media'
+  };
+
+  function renderPageImages(){
+    var cur = C.pageImages || {};
+    var base = (window.FNFF_CONTENT.pageImages) || {};
+    document.getElementById('pimgbox').innerHTML = Object.keys(PAGE_LABELS).map(function(k){
+      var v = cur[k] || '';
+      var changed = v && v !== base[k];
+      var prev = v ? '<img src="'+esc(window.FNFF.src(v))+'" style="width:150px;height:67px;object-fit:cover;border-radius:7px;border:1px solid var(--line);display:block">'
+                   : '<div class="thumb-ph" style="width:150px;height:67px">none</div>';
+      return '<div style="display:flex;gap:16px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line);flex-wrap:wrap">'+
+        prev+
+        '<div style="flex:1;min-width:190px"><b style="font-size:13.5px">'+esc(PAGE_LABELS[k])+'</b>'+
+        (changed?' <span class="pill2">changed</span>':'')+
+        '<div style="font-size:11px;color:var(--body);margin-top:3px"><code>'+esc(k)+'</code></div></div>'+
+        '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'+
+        '<input type="file" data-pimgf="'+esc(k)+'" accept="image/*" style="max-width:200px"><input class="urlbox" placeholder="or type a filename already on the server, e.g. products/carrot.jpg" style="margin-top:6px;font-family:var(--mono);font-size:11.5px">'+
+        (changed?'<button class="rowbtn" data-pimgr="'+esc(k)+'">Restore</button>':'')+
+        '</div></div>';
+    }).join('');
+
+    document.querySelectorAll('[data-pimgf]').forEach(function(el){
+      el.addEventListener('change', function(){
+        readFile(el, function(u){
+          if(!u) return;
+          var m = Object.assign({}, C.pageImages||{});
+          m[el.getAttribute('data-pimgf')] = u;
+          save('pageImages', m); renderPageImages();
+          window.fnffToast('Header image replaced');
+        });
+      });
+    });
+    document.querySelectorAll('[data-pimgr]').forEach(function(b){
+      b.addEventListener('click', function(){
+        var k=b.getAttribute('data-pimgr');
+        var m=Object.assign({}, C.pageImages||{});
+        m[k]=base[k]||''; save('pageImages',m); renderPageImages();
+        window.fnffToast('Original header restored');
+      });
+    });
+  }
+
+  /* ================= PAGE TEXT ================= */
+  var TI = window.FNFF_TEXTINDEX || {};
+
+  function textVal(k, fallback){
+    var t = (C.text||{}), parts = k.split('.'), n = t;
+    for (var i=0;i<parts.length;i++){ if(n==null) return fallback; n = n[parts[i]]; }
+    return n==null ? fallback : n;
+  }
+  function stripTags(s){ return String(s).replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim(); }
+
+  function renderTicker(){
+    document.getElementById('tickbox').value = (C.ticker||[]).join('\n');
+    var s=(C.text&&C.text.ack)||{};
+    document.getElementById('ackt').value  = stripTags(s.title||'Acknowledgement of Country');
+    document.getElementById('ackb').value  = stripTags(s.body||(TI['index.html']?
+      (TI['index.html'].blocks.filter(function(b){return b.key==='ack.body';})[0]||{}).text||'':''));
+    document.getElementById('ackbd').value = stripTags(s.badge||'PEOPLE · COUNTRY · FOOD');
+  }
+  document.getElementById('ticksave').addEventListener('click', function(){
+    var arr=document.getElementById('tickbox').value.split('\n')
+      .map(function(x){return x.trim();}).filter(Boolean);
+    save('ticker',arr); flash('tickmsg','✓ Saved — '+arr.length+' items');
+  });
+  document.getElementById('acksave').addEventListener('click', function(){
+    window.FNFF.saveOverride('text.ack.title',  document.getElementById('ackt').value);
+    window.FNFF.saveOverride('text.ack.body',   document.getElementById('ackb').value);
+    window.FNFF.saveOverride('text.ack.badge',  document.getElementById('ackbd').value);
+    C = window.FNFF.get(); mark(); refreshExport(); flash('ackmsg','✓ Saved');
+  });
+
+  function renderTextPages(){
+    var sel=document.getElementById('txtpage');
+    var keys=Object.keys(TI);
+    sel.innerHTML = keys.map(function(k){
+      return '<option value="'+k+'">'+esc(TI[k].name)+' ('+TI[k].blocks.length+')</option>';
+    }).join('');
+    var n=0; keys.forEach(function(k){ n+=TI[k].blocks.length; });
+    document.getElementById('txtcnt').textContent = n + ' text blocks';
+  }
+
+  function renderTextBlocks(){
+    var pageKey=document.getElementById('txtpage').value;
+    var q=(document.getElementById('txtq').value||'').toLowerCase().trim();
+    var pg=TI[pageKey];
+    if(!pg){ document.getElementById('txtbox').innerHTML='<p class="hint">Nothing to edit on this page.</p>'; return; }
+    var rows=pg.blocks.filter(function(b){
+      if(!q) return true;
+      return (b.text+' '+b.key).toLowerCase().indexOf(q)>-1;
+    });
+    document.getElementById('txtbox').innerHTML = rows.length ? rows.map(function(b){
+      var cur=textVal(b.key,null);
+      var val=cur==null ? b.text : stripTags(cur);
+      var changed = cur!=null && stripTags(cur)!==b.text;
+      var big = b.tag==='p' || val.length>90;
+      var label = {h1:'Page title',h2:'Section heading',h3:'Card heading',h4:'Sub-heading',
+                   b:'Bold line',p:'Paragraph',span:'Line',div:'Label'}[b.tag] || b.tag;
+      return '<div class="box" style="background:'+(changed?'var(--euc-lt)':'var(--cream)')+';margin-bottom:10px;padding:16px 18px">'+
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">'+
+        '<b style="font-size:12px;color:var(--body)">'+esc(label)+(changed?' &nbsp;<span class="pill2">edited</span>':'')+'</b>'+
+        '<code style="font-size:10px">'+esc(b.key)+'</code></div>'+
+        (big ? '<textarea data-tx="'+esc(b.key)+'" style="min-height:70px">'+esc(val)+'</textarea>'
+             : '<input data-tx="'+esc(b.key)+'" value="'+esc(val)+'">')+
+        '</div>';
+    }).join('') : '<p class="hint">No block matches that.</p>';
+  }
+
+  document.getElementById('txtpage').addEventListener('change', renderTextBlocks);
+  document.getElementById('txtq').addEventListener('input', renderTextBlocks);
+  document.getElementById('txtsave').addEventListener('click', function(){
+    var n=0;
+    document.querySelectorAll('[data-tx]').forEach(function(el){
+      window.FNFF.saveOverride('text.'+el.getAttribute('data-tx'), el.value); n++;
+    });
+    C=window.FNFF.get(); mark(); refreshExport(); renderTextBlocks();
+    flash('txtmsg','✓ '+n+' blocks saved');
+  });
+  document.getElementById('txtreset').addEventListener('click', function(){
+    var pageKey=document.getElementById('txtpage').value, pg=TI[pageKey];
+    if(!pg || !confirm('Restore the original wording for every block on '+pg.name+'?')) return;
+    pg.blocks.forEach(function(b){ window.FNFF.saveOverride('text.'+b.key, b.text); });
+    C=window.FNFF.get(); mark(); refreshExport(); renderTextBlocks();
+    flash('txtmsg','✓ Original wording restored');
+  });
+
+  /* ================= MENU ================= */
+  function renderNav(){
+    var nav = C.nav || [];
+    document.getElementById('menubox').innerHTML = nav.map(function(it,i){
+      var sub = (it.sub||[]).map(function(s,j){
+        return '<div class="fr" style="grid-template-columns:1fr 1fr 110px;margin-bottom:8px">'+
+          '<div class="fld"><input data-n="'+i+'" data-s="'+j+'" data-k="label" value="'+esc(s.label)+'" placeholder="Sub-item name"></div>'+
+          '<div class="fld"><input data-n="'+i+'" data-s="'+j+'" data-k="href" value="'+esc(s.href)+'" placeholder="page.html"></div>'+
+          '<div><button class="rowbtn del" data-dsub="'+i+'.'+j+'">Remove</button></div></div>';
+      }).join('');
+      return '<div class="box" style="background:var(--cream);margin-bottom:14px">'+
+        '<div class="fr" style="grid-template-columns:1fr 1fr 230px">'+
+        '<div class="fld"><label>Menu item</label><input data-n="'+i+'" data-k="label" value="'+esc(it.label)+'"></div>'+
+        '<div class="fld"><label>Links to</label><input data-n="'+i+'" data-k="href" value="'+esc(it.href)+'"></div>'+
+        '<div style="display:flex;gap:6px;align-items:flex-end;padding-bottom:2px">'+
+          '<button class="rowbtn" data-up="'+i+'" title="Move up">&uarr;</button>'+
+          '<button class="rowbtn" data-dn="'+i+'" title="Move down">&darr;</button>'+
+          '<button class="rowbtn" data-asub="'+i+'">+ Sub-item</button>'+
+          '<button class="rowbtn del" data-dnav="'+i+'">Remove</button></div></div>'+
+        (sub ? '<div style="margin-top:12px;padding-left:16px;border-left:3px solid var(--sand-2)">'+
+               '<label style="display:block;margin-bottom:8px;font-size:var(--t-xs);font-weight:600">Sub-menu</label>'+sub+'</div>' : '')+
+        '</div>';
+    }).join('');
+
+    function collect(){
+      var arr = (C.nav||[]).map(function(it){
+        return {href:it.href,label:it.label,sub:(it.sub||[]).map(function(s){return {href:s.href,label:s.label};})};
+      });
+      document.querySelectorAll('[data-n]').forEach(function(el){
+        var i=+el.getAttribute('data-n'), k=el.getAttribute('data-k'), s=el.getAttribute('data-s');
+        if(!arr[i]) return;
+        if(s===null) arr[i][k]=el.value; else if(arr[i].sub[+s]) arr[i].sub[+s][k]=el.value;
+      });
+      return arr;
+    }
+    function apply(arr,msg){ save('nav',arr); renderNav(); if(msg) flash('navmsg',msg); }
+
+    document.querySelectorAll('[data-dnav]').forEach(function(b){ b.addEventListener('click',function(){
+      var a=collect(); a.splice(+b.getAttribute('data-dnav'),1); apply(a); }); });
+    document.querySelectorAll('[data-dsub]').forEach(function(b){ b.addEventListener('click',function(){
+      var p=b.getAttribute('data-dsub').split('.'), a=collect(); a[+p[0]].sub.splice(+p[1],1); apply(a); }); });
+    document.querySelectorAll('[data-asub]').forEach(function(b){ b.addEventListener('click',function(){
+      var a=collect(); a[+b.getAttribute('data-asub')].sub.push({label:'New sub-item',href:'index.html'}); apply(a); }); });
+    document.querySelectorAll('[data-up]').forEach(function(b){ b.addEventListener('click',function(){
+      var i=+b.getAttribute('data-up'); if(!i) return; var a=collect(); a.splice(i-1,0,a.splice(i,1)[0]); apply(a); }); });
+    document.querySelectorAll('[data-dn]').forEach(function(b){ b.addEventListener('click',function(){
+      var i=+b.getAttribute('data-dn'); var a=collect(); if(i>=a.length-1) return; a.splice(i+1,0,a.splice(i,1)[0]); apply(a); }); });
+
+    document.getElementById('navsave').onclick = function(){ apply(collect(),'✓ Menu saved'); };
+    document.getElementById('navadd').onclick  = function(){
+      var a=collect(); a.push({label:'New item',href:'index.html',sub:[]}); apply(a); };
+    document.getElementById('navreset').onclick = function(){
+      if(!confirm('Return the menu to the published version?')) return;
+      save('nav', JSON.parse(JSON.stringify(window.FNFF_CONTENT.nav||[])));
+      renderNav(); flash('navmsg','✓ Menu restored');
+    };
+  }
+
+  function flash(id,msg){
+    var e=document.getElementById(id); if(!e) return;
+    e.textContent=msg; setTimeout(function(){e.textContent='';},2400);
+  }
+
+  /* ================= CUSTOM PAGES ================= */
+  function slugify(s){ return String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
+
+  function renderPages(){
+    var pages = C.pages||[];
+    document.getElementById('pgcnt').textContent = pages.length + (pages.length===1?' page':' pages');
+    document.getElementById('pagesbox').innerHTML = pages.length ? pages.map(function(p,i){
+      var link = 'page.html?p='+p.slug;
+      return '<div class="box" style="background:var(--cream);margin-bottom:14px">'+
+        '<div class="fr" style="grid-template-columns:1fr 1fr">'+
+        '<div class="fld"><label>Title</label><input data-pg="'+i+'" data-k="title" value="'+esc(p.title||'')+'"></div>'+
+        '<div class="fld"><label>Kicker</label><input data-pg="'+i+'" data-k="kicker" value="'+esc(p.kicker||'')+'"></div></div>'+
+        '<div class="fld" style="margin-bottom:12px"><label>Intro line</label><input data-pg="'+i+'" data-k="lead" value="'+esc(p.lead||'')+'"></div>'+
+        '<div class="fld" style="margin-bottom:12px"><label>Page content &mdash; plain text, or HTML such as &lt;h2&gt; and &lt;p&gt;</label>'+
+        '<textarea data-pg="'+i+'" data-k="body" style="min-height:180px">'+esc(p.body||'')+'</textarea></div>'+
+        '<div class="fr" style="grid-template-columns:1fr 1fr">'+
+        '<div class="fld"><label>Header image <span style="font-weight:400;color:var(--body)">— 1440×640</span></label><input type="file" data-pghero="'+i+'" accept="image/*"><input class="urlbox" placeholder="or type a filename already on the server, e.g. products/carrot.jpg" style="margin-top:6px;font-family:var(--mono);font-size:11.5px"></div>'+
+        '<div class="fld"><label>Add a gallery image <span style="font-weight:400;color:var(--body)">— 900×675</span></label><input type="file" data-pgimg="'+i+'" accept="image/*"><input class="urlbox" placeholder="or type a filename already on the server, e.g. products/carrot.jpg" style="margin-top:6px;font-family:var(--mono);font-size:11.5px"></div></div>'+
+        '<p class="hint" style="margin:10px 0 0">Menu link for this page: <code>'+esc(link)+'</code> &nbsp;&middot;&nbsp; '+
+        (p.images&&p.images.length ? p.images.length+' gallery image'+(p.images.length>1?'s':'') : 'no gallery images')+'</p>'+
+        '<div class="ar" style="margin-top:12px">'+
+        '<a class="btn btn-g btn-sm" href="'+esc(link)+'" target="_blank">Open page</a>'+
+        '<button class="rowbtn del" data-dpg="'+i+'">Delete page</button></div></div>';
+    }).join('') : '<p class="hint">No pages created yet.</p>';
+
+    document.querySelectorAll('[data-dpg]').forEach(function(b){ b.addEventListener('click',function(){
+      var i=+b.getAttribute('data-dpg');
+      if(!confirm('Delete the page "'+(C.pages[i].title||'')+'"? Remove its menu link too.')) return;
+      var a=C.pages.slice(); a.splice(i,1); save('pages',a); renderPages(); renderSeo();
+    });});
+    document.querySelectorAll('[data-pg]').forEach(function(el){ el.addEventListener('change',function(){
+      var a=C.pages.map(function(p){return Object.assign({},p);});
+      a[+el.getAttribute('data-pg')][el.getAttribute('data-k')]=el.value;
+      save('pages',a);
+    });});
+    document.querySelectorAll('[data-pghero]').forEach(function(el){ el.addEventListener('change',function(){
+      readFile(el,function(u){ if(!u) return;
+        var a=C.pages.map(function(p){return Object.assign({},p);});
+        a[+el.getAttribute('data-pghero')].heroImg=u; save('pages',a); window.fnffToast('Header image set');
+      });});});
+    document.querySelectorAll('[data-pgimg]').forEach(function(el){ el.addEventListener('change',function(){
+      readFile(el,function(u){ if(!u) return;
+        var a=C.pages.map(function(p){return Object.assign({},p);});
+        var i=+el.getAttribute('data-pgimg');
+        a[i].images=(a[i].images||[]).concat([{img:u,caption:''}]);
+        save('pages',a); renderPages(); window.fnffToast('Image added to the gallery');
+      });});});
+  }
+
+  document.getElementById('npadd').addEventListener('click', function(){
+    var t=document.getElementById('npt').value.trim();
+    if(!t){ flash('npmsg','Give the page a title first'); return; }
+    var s=slugify(document.getElementById('nps').value.trim()||t);
+    if((C.pages||[]).some(function(p){return p.slug===s;})){ flash('npmsg','That address is already in use'); return; }
+    var a=(C.pages||[]).concat([{
+      slug:s, title:t,
+      kicker:document.getElementById('npk').value.trim()||'First Nation Fresh Foods',
+      lead:document.getElementById('npl').value.trim(),
+      body:'<p>Write the content of this page here. You can use headings and paragraphs.</p>',
+      heroImg:'hero-about.jpg', images:[],
+      seoTitle:t, seoDesc:document.getElementById('npl').value.trim()
+    }]);
+    save('pages',a);
+    ['npt','nps','npk','npl'].forEach(function(id){document.getElementById(id).value='';});
+    renderPages(); renderSeo(); flash('npmsg','✓ Page created');
+  });
+
+  /* ================= PROGRAMS ================= */
+  function progKey(){ return document.getElementById('progsel').value; }
+  function prog(){ return (C.programs||{})[progKey()] || {points:[],images:[],docs:[]}; }
+  function saveProg(obj){
+    var all=Object.assign({},C.programs||{});
+    all[progKey()]=obj; save('programs',all);
+  }
+
+  function renderProg(){
+    var p=prog();
+    document.getElementById('progintro').value = p.intro||'';
+    document.getElementById('progpts').innerHTML = (p.points||[]).map(function(x,i){
+      return '<div class="box" style="background:var(--cream);margin-bottom:12px">'+
+        '<div class="fld" style="margin-bottom:10px"><label>Heading</label><input data-pt="'+i+'" data-k="title" value="'+esc(x.title)+'"></div>'+
+        '<div class="fld"><label>Text</label><textarea data-pt="'+i+'" data-k="body">'+esc(x.body)+'</textarea></div>'+
+        '<button class="rowbtn del" data-dpt="'+i+'" style="margin-top:10px">Remove point</button></div>';
+    }).join('') || '<p class="hint">No points yet.</p>';
+
+    document.getElementById('pgimgtb').innerHTML = (p.images||[]).map(function(im,i){
+      return '<tr><td>'+img(im.img,'')+'</td>'+
+        '<td><input data-pim="'+i+'" value="'+esc(im.caption||'')+'" placeholder="Caption"></td>'+
+        '<td><button class="rowbtn del" data-dpim="'+i+'">Delete</button></td></tr>';
+    }).join('') || '<tr><td colspan="3" style="text-align:center;padding:20px;color:var(--body)">No images yet.</td></tr>';
+
+    document.getElementById('pdtb').innerHTML = (p.docs||[]).map(function(d,i){
+      return '<tr><td>'+img(d.img,d.title)+'</td><td><b>'+esc(d.title)+'</b>'+
+        (d.file?' <span class="pill2">file attached</span>':'')+'</td><td>'+esc(d.issuer||'')+'</td>'+
+        '<td>'+esc(d.status||'')+'</td><td><button class="rowbtn del" data-dpd="'+i+'">Delete</button></td></tr>';
+    }).join('') || '<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--body)">No documents yet.</td></tr>';
+
+    document.querySelectorAll('[data-dpt]').forEach(function(b){ b.addEventListener('click',function(){
+      var o=Object.assign({},prog()); o.points=o.points.slice(); o.points.splice(+b.getAttribute('data-dpt'),1);
+      saveProg(o); renderProg(); });});
+    document.querySelectorAll('[data-dpim]').forEach(function(b){ b.addEventListener('click',function(){
+      var o=Object.assign({},prog()); o.images=o.images.slice(); o.images.splice(+b.getAttribute('data-dpim'),1);
+      saveProg(o); renderProg(); });});
+    document.querySelectorAll('[data-dpd]').forEach(function(b){ b.addEventListener('click',function(){
+      var o=Object.assign({},prog()); o.docs=o.docs.slice(); o.docs.splice(+b.getAttribute('data-dpd'),1);
+      saveProg(o); renderProg(); });});
+    document.querySelectorAll('[data-pim]').forEach(function(el){ el.addEventListener('change',function(){
+      var o=Object.assign({},prog()); o.images=o.images.map(function(x){return Object.assign({},x);});
+      o.images[+el.getAttribute('data-pim')].caption=el.value; saveProg(o); });});
+  }
+
+  document.getElementById('progsel').addEventListener('change', renderProg);
+  document.getElementById('progsave').addEventListener('click', function(){
+    var o=Object.assign({},prog()); o.intro=document.getElementById('progintro').value;
+    saveProg(o); flash('progmsg','✓ Saved');
+  });
+  document.getElementById('ptadd').addEventListener('click', function(){
+    var o=Object.assign({},prog()); o.points=(o.points||[]).concat([{title:'New point',body:'Describe it here.'}]);
+    saveProg(o); renderProg();
+  });
+  document.getElementById('ptsave').addEventListener('click', function(){
+    var o=Object.assign({},prog()); o.points=o.points.map(function(x){return Object.assign({},x);});
+    document.querySelectorAll('[data-pt]').forEach(function(el){
+      o.points[+el.getAttribute('data-pt')][el.getAttribute('data-k')]=el.value; });
+    saveProg(o); flash('progmsg','✓ Points saved');
+  });
+  document.getElementById('pgimgadd').addEventListener('click', function(){
+    readFile(document.getElementById('pgimgf'), function(u){
+      if(!u){ window.fnffToast('Choose an image first'); return; }
+      var o=Object.assign({},prog());
+      o.images=(o.images||[]).concat([{img:u,caption:document.getElementById('pgimgc').value.trim()}]);
+      saveProg(o); document.getElementById('pgimgf').value=''; document.getElementById('pgimgc').value='';
+      renderProg(); window.fnffToast('Image added');
+    });
+  });
+  document.getElementById('pdadd').addEventListener('click', function(){
+    var t=document.getElementById('pdt').value.trim();
+    if(!t){ window.fnffToast('Give the document a title'); return; }
+    readFile(document.getElementById('pdf1'), function(preview){
+      readFile(document.getElementById('pdf2'), function(file){
+        var o=Object.assign({},prog());
+        o.docs=(o.docs||[]).concat([{
+          title:t, issuer:document.getElementById('pdi').value.trim(),
+          status:document.getElementById('pds').value.trim()||'Current',
+          img:preview||'', file:file||''
+        }]);
+        saveProg(o);
+        ['pdt','pdi','pds','pdf1','pdf2'].forEach(function(id){document.getElementById(id).value='';});
+        renderProg(); window.fnffToast('Document added');
+      });
+    });
+  });
+
+  /* ================= SEO ================= */
+  function seoRow(key,label,title,desc){
+    return '<div class="box" style="background:var(--cream);margin-bottom:12px">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">'+
+      '<b style="font-size:14px">'+esc(label)+'</b><code>'+esc(key)+'</code></div>'+
+      '<div class="fld" style="margin-bottom:10px"><label>Page title <span class="cc" data-for="t'+esc(key)+'"></span></label>'+
+      '<input data-seo="'+esc(key)+'" data-k="title" id="t'+esc(key)+'" value="'+esc(title)+'"></div>'+
+      '<div class="fld"><label>Meta description <span class="cc" data-for="d'+esc(key)+'"></span></label>'+
+      '<textarea data-seo="'+esc(key)+'" data-k="desc" id="d'+esc(key)+'" style="min-height:62px">'+esc(desc)+'</textarea></div></div>';
+  }
+
+  function renderSeo(){
+    var seo=C.seo||{}, out='';
+    var names={'index.html':'Home','company-profile.html':'Company Profile','vision.html':'Our Vision',
+      'mission.html':'Our Mission','organisation.html':'Organisation Chart','terms-of-trade.html':'Terms of Trade',
+      'products.html':'Product Catalogue','category.html':'Product Division','own-label.html':'Our Own Label',
+      'facilities.html':'Facilities','equipment.html':'Processing Equipment','quality.html':'Quality & Safety',
+      'certifications.html':'Certifications','policies.html':'Policies','health-safety.html':'Health & Safety Program',
+      'modern-slavery.html':'Modern Slavery Program','markets.html':'Markets We Serve','contact.html':'Contact',
+      'marketing-media.html':'Marketing Media'};
+    Object.keys(names).forEach(function(k){
+      var s=seo[k]||{}; out+=seoRow(k,names[k],s.title||'',s.desc||'');
+    });
+    (C.pages||[]).forEach(function(p){
+      out+='<div class="box" style="background:var(--euc-lt);margin-bottom:12px">'+
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">'+
+        '<b style="font-size:14px">'+esc(p.title)+'</b><code>page.html?p='+esc(p.slug)+'</code></div>'+
+        '<div class="fld" style="margin-bottom:10px"><label>Page title <span class="cc" data-for="tp-'+esc(p.slug)+'"></span></label>'+
+        '<input data-seopg="'+esc(p.slug)+'" data-k="seoTitle" id="tp-'+esc(p.slug)+'" value="'+esc(p.seoTitle||p.title||'')+'"></div>'+
+        '<div class="fld"><label>Meta description <span class="cc" data-for="dp-'+esc(p.slug)+'"></span></label>'+
+        '<textarea data-seopg="'+esc(p.slug)+'" data-k="seoDesc" id="dp-'+esc(p.slug)+'" style="min-height:62px">'+esc(p.seoDesc||'')+'</textarea></div></div>';
+    });
+    document.getElementById('seobox').innerHTML=out;
+    document.querySelectorAll('.cc').forEach(function(c){
+      var f=document.getElementById(c.getAttribute('data-for'));
+      if(!f) return;
+      var lim = f.tagName==='INPUT' ? 60 : 160;
+      function upd(){
+        var n=f.value.length;
+        c.textContent='— '+n+' / '+lim;
+        c.style.color = n>lim ? 'var(--ochre-dk)' : 'var(--body)';
+        c.style.fontWeight = n>lim ? '700' : '400';
+      }
+      f.addEventListener('input',upd); upd();
+    });
+  }
+
+  document.getElementById('seosave').addEventListener('click', function(){
+    var seo=Object.assign({},C.seo||{});
+    document.querySelectorAll('[data-seo]').forEach(function(el){
+      var k=el.getAttribute('data-seo');
+      seo[k]=Object.assign({},seo[k]||{});
+      seo[k][el.getAttribute('data-k')]=el.value;
+    });
+    save('seo',seo);
+    var pages=(C.pages||[]).map(function(p){return Object.assign({},p);});
+    document.querySelectorAll('[data-seopg]').forEach(function(el){
+      var s=el.getAttribute('data-seopg');
+      pages.forEach(function(p){ if(p.slug===s) p[el.getAttribute('data-k')]=el.value; });
+    });
+    save('pages',pages);
+    flash('seomsg','✓ SEO saved for every page');
+  });
+
+  /* ================= APPEARANCE ================= */
+  var COLS=[['euc','Brand green','Menu, bands, secondary buttons'],
+            ['ochre','Burnt orange','Primary buttons, accents, highlights'],
+            ['maroon','Deep red','Acknowledgement band'],
+            ['cream','Page background','Default section background'],
+            ['sand','Alternate background','Every second section'],
+            ['charcoal','Dark surfaces','Header, footer, dark bands'],
+            ['ink','Headings','All heading text'],
+            ['body','Body text','Paragraph text']];
+  var BOXES=[['cardBg','Card background','Product and certificate cards'],
+             ['cardBorder','Card border','The hairline around every card']];
+
+  function swatch(k,label,hint,val){
+    return '<div class="fld"><label>'+esc(label)+'</label>'+
+      '<div style="display:flex;gap:8px;align-items:center">'+
+      '<input type="color" data-col="'+k+'" value="'+esc(val)+'" style="width:46px;height:38px;padding:2px;border-radius:8px;border:1px solid var(--line);cursor:pointer">'+
+      '<input type="text" data-coltext="'+k+'" value="'+esc(val)+'" style="flex:1;font-family:var(--mono);font-size:12px"></div>'+
+      '<span style="font-size:11px;color:var(--body);display:block;margin-top:5px">'+esc(hint)+'</span></div>';
+  }
+
+  function renderLook(){
+    var t=C.theme||{};
+    document.getElementById('colbox').innerHTML = COLS.map(function(c){return swatch(c[0],c[1],c[2],t[c[0]]||'#000000');}).join('');
+    document.getElementById('boxbox').innerHTML = BOXES.map(function(c){return swatch(c[0],c[1],c[2],t[c[0]]||'#FFFFFF');}).join('');
+    document.getElementById('panelbox').innerHTML =
+      swatch('panelBg','Home slider panel','Behind the slider headline and text',t.panelBg||'#1C1510')+
+      '<div class="fld"><label>Slider panel solidity</label>'+
+      '<input type="number" data-col="panelOpacity" min="0" max="1" step="0.02" value="'+(t.panelOpacity===undefined?0.72:t.panelOpacity)+'">'+
+      '<span style="font-size:11px;color:var(--body);display:block;margin-top:5px">0 = fully transparent, 1 = fully solid</span></div>'+
+      swatch('titleBandBg','Page title panel','Behind the title on every inside page',t.titleBandBg||'#1C1510')+
+      '<div class="fld"><label>Page title solidity</label>'+
+      '<input type="number" data-col="titleBandOpacity" min="0" max="1" step="0.02" value="'+(t.titleBandOpacity===undefined?0.66:t.titleBandOpacity)+'">'+
+      '<span style="font-size:11px;color:var(--body);display:block;margin-top:5px">0 = fully transparent, 1 = fully solid</span></div>';
+
+    document.querySelectorAll('[data-col][type=color]').forEach(function(el){
+      el.addEventListener('input',function(){
+        var t2=document.querySelector('[data-coltext="'+el.getAttribute('data-col')+'"]');
+        if(t2) t2.value=el.value;
+      });
+    });
+    document.querySelectorAll('[data-coltext]').forEach(function(el){
+      el.addEventListener('change',function(){
+        var c=document.querySelector('input[type=color][data-col="'+el.getAttribute('data-coltext')+'"]');
+        if(c && /^#[0-9a-f]{6}$/i.test(el.value)) c.value=el.value;
+      });
+    });
+  }
+
+  document.getElementById('looksave').addEventListener('click', function(){
+    var t=Object.assign({},C.theme||{});
+    document.querySelectorAll('[data-col]').forEach(function(el){
+      var k=el.getAttribute('data-col');
+      t[k] = el.type==='number' ? parseFloat(el.value) : el.value;
+    });
+    document.querySelectorAll('[data-coltext]').forEach(function(el){
+      if(/^#[0-9a-f]{6}$/i.test(el.value)) t[el.getAttribute('data-coltext')]=el.value;
+    });
+    save('theme',t); flash('lookmsg','✓ Saved — open the site to see it');
+  });
+  document.getElementById('lookreset').addEventListener('click', function(){
+    if(!confirm('Return every colour to the approved brand palette?')) return;
+    save('theme', JSON.parse(JSON.stringify(window.FNFF_CONTENT.theme||{})));
+    renderLook(); flash('lookmsg','✓ Brand palette restored');
+  });
+
+  /* ================= SETTINGS ================= */
+  var SETS=[['company','Company name'],['tagline','Tagline'],['address','Address'],
+            ['phone','Telephone'],['fax','Facsimile'],
+            ['emailOrders','Orders email — quote specifications arrive here'],
+            ['emailSales','Sales email — enquiry form arrives here'],
+            ['emailAdmin','Administration email']];
+
+  function renderSet(){
+    var s=C.settings||{};
+    document.getElementById('setbox').innerHTML = SETS.map(function(x){
+      return '<div class="fld"'+(x[0]==='address'?' style="grid-column:span 2"':'')+'><label>'+esc(x[1])+'</label>'+
+        '<input data-set="'+x[0]+'" value="'+esc(s[x[0]]||'')+'"></div>';
+    }).join('');
+    document.getElementById('toturl').value   = s.totUrl||'';
+    document.getElementById('totlabel').value = s.totLabel||'Terms of Trade (PDF)';
+    document.getElementById('formep').value   = s.formEndpoint||'send.php';
+    document.getElementById('orgprev').innerHTML = s.orgChartImg
+      ? '<img src="'+esc(s.orgChartImg)+'" style="max-width:260px;border:1px solid var(--line);border-radius:8px">'
+      : '<span class="hint">No chart uploaded</span>';
+  }
+
+  function saveSet(patch,msgId,msg){
+    var s=Object.assign({},C.settings||{},patch||{});
+    save('settings',s); renderSet(); if(msgId) flash(msgId,msg);
+  }
+
+  document.getElementById('setsave').addEventListener('click', function(){
+    var p={};
+    document.querySelectorAll('[data-set]').forEach(function(el){ p[el.getAttribute('data-set')]=el.value; });
+    p.totUrl=document.getElementById('toturl').value.trim();
+    p.totLabel=document.getElementById('totlabel').value.trim()||'Terms of Trade (PDF)';
+    p.formEndpoint=document.getElementById('formep').value.trim()||'send.php';
+    saveSet(p,'setmsg','✓ Settings saved across the site');
+  });
+  document.getElementById('totf').addEventListener('change', function(){
+    readFile(this,function(u){ if(u) saveSet({totUrl:u},'totmsg','✓ Document attached'); });
+  });
+  document.getElementById('totclear').addEventListener('click', function(){
+    saveSet({totUrl:''},'totmsg','Document removed');
+  });
+  document.getElementById('orgf').addEventListener('change', function(){
+    readFile(this,function(u){ if(u){ saveSet({orgChartImg:u}); window.fnffToast('Organisation chart uploaded'); } });
+  });
+  document.getElementById('orgclear').addEventListener('click', function(){ saveSet({orgChartImg:''}); });
+
   /* ================= PUBLISH ================= */
   function refreshExport(){ document.getElementById('exportOut').value = window.FNFF.exportFile(); }
   document.getElementById('dl').addEventListener('click', function(){
@@ -488,7 +1498,10 @@
   /* ---- boot ---- */
   catOptions(document.getElementById('pc'), false);
   catOptions(document.getElementById('pfilter'), true);
-  renderProducts(); renderCats(); renderCerts(); renderVids(); renderHero(); renderMkt(); refreshExport();
+  renderProducts(); renderCats(); renderCerts(); renderVids(); renderHero(); renderMkt();
+  renderNav(); renderPages(); renderProg(); renderSeo(); renderLook(); renderSet();
+  renderTicker(); renderTextPages(); renderTextBlocks(); renderPageImages(); storageMeter();
+  refreshExport();
 })();
 </script>
 </body>
